@@ -29,7 +29,7 @@
                             <label for="email" class="col-lg-4 col-form-label">メールアドレス</label>
 
                             <div class="col-lg-8">
-                                <input id="email" type="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
 
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback">
@@ -43,7 +43,7 @@
                             <label for="password" class="col-lg-4 col-form-label">パスワード</label>
 
                             <div class="col-lg-8">
-                                <input id="password" type="password" class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" name="password" required>
+                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
 
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback">

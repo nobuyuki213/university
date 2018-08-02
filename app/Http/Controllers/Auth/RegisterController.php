@@ -60,7 +60,7 @@ class RegisterController extends Controller
         ]);
     }
 
-    public function pre_check(Request $request)
+    public function preCheck(Request $request)
     {
         $this->validator($request->all())->validate();
 
@@ -85,7 +85,7 @@ class RegisterController extends Controller
         //     'name' => $data['name'],
         //     'email' => $data['email'],
         //     'password' => bcrypt($data['password']),
-        // ]); 初期の会員登録のユーザー作成
+        // ]); 初期のユーザー作成のソースコード
 
         $user = User::create([
             'email' => $data['email'],
@@ -97,5 +97,66 @@ class RegisterController extends Controller
         Mail::to($user->email)->send($email);
 
         return $user;
+    }
+
+        public function register(Request $request)
+    {
+        event(new Registered($user = $this->create( $request->all() )));
+
+        return view('auth.registered');
+    }
+
+    /**
+     * [showForm description 本会員登録 入力画面]
+     * @param  [type] $email_token
+     * @return [type] \Illuminate\Contracts\View\Factory|\Illuminate\View
+     */
+    public function showForm($email_token)
+    {
+        // 使用可能なトークンかを確認
+        if (!User::where('email_verify_token', $email_token)->exists() ){
+            return view('auth.register_main')->with('message', '無効なトークンです');
+        } else {
+            $user = User::where('email_verify_token', $email_token)->first();
+            // 本登録済みユーザーかを確認
+            if ($user->status == config('const.USER_STATUS_REGISTER')) {
+                logger("status".$user->status);
+                return view('auth.register_main')->with('message', '既に登録されています。ログインして利用してください。');
+            } //REGISTER=1
+            // ユーザーステータスの更新
+            $user->status = config('const.USER_STATUS.MAIL_AUTHED');
+            if ($user->save()) {
+                return view('auth.register_main', compact('email_token'));
+            } else {
+                return view('auth.register_main')->with('message', 'メール認証に失敗しました。再度、メールからリンクをクリックしてください。');
+            }
+        }
+    }
+
+    /**
+     * [mainCheck description 本会員登録 確認画面]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function mainCheck(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'name_phonetic' => 'required|string',
+            'birth_year' => 'required|numeric',
+            'birth_momth' => 'required|numeric',
+            'birth_day' => 'required|numeric',
+        ]);
+        // データ保存用
+        $email_token = $request->email_token;
+        // User インスタンスを生成し view に渡す
+        $user = new User();
+        $user->name = $request->name;
+        $user->name_phonetic = $request->name_phonetic;
+        $user->birth_year = $request->birth_year;
+        $user->birth_month = $request->birth_month;
+        $user->birth_day = $request->birth_day;
+
+        return view('auth.register_main_check', compact('user', 'email_token'));
     }
 }
