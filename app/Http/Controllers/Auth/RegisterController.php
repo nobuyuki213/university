@@ -81,10 +81,21 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+        // return User::create([
+        //     'name' => $data['name'],
+        //     'email' => $data['email'],
+        //     'password' => bcrypt($data['password']),
+        // ]); 初期の会員登録のユーザー作成
+
+        $user = User::create([
             'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'password' => Hash::make($data['password']),
+            'email_verify_token' => base64_encode($data['email']),
         ]);
+
+        $email = new EmailVerification($user);
+        Mail::to($user->email)->send($email);
+
+        return $user;
     }
 }
