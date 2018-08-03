@@ -119,12 +119,13 @@ class RegisterController extends Controller
         } else {
             $user = User::where('email_verify_token', $email_token)->first();
             // 本登録済みユーザーかを確認
-            if ($user->status == config('const.USER_STATUS_REGISTER')) {
+            if ($user->status == config('const.USER_STATUS.REGISTER')) {
                 logger("status".$user->status);
                 return view('auth.register_main')->with('message', '既に登録されています。ログインして利用してください。');
             } //REGISTER=1
             // ユーザーステータスの更新
             $user->status = config('const.USER_STATUS.MAIL_AUTHED');
+            $user->email_verified = config('const.USER_STATUS.MAIL_AUTHED');
             if ($user->save()) {
                 return view('auth.register_main', compact('email_token'));
             } else {
@@ -144,7 +145,7 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'name_phonetic' => 'required|string',
             'birth_year' => 'required|numeric',
-            'birth_momth' => 'required|numeric',
+            'birth_month' => 'required|numeric',
             'birth_day' => 'required|numeric',
         ]);
         // データ保存用
@@ -158,5 +159,21 @@ class RegisterController extends Controller
         $user->birth_day = $request->birth_day;
 
         return view('auth.register_main_check', compact('user', 'email_token'));
+    }
+
+    public function mainRegister(Request $request)
+    {
+        $user = User::where('email_verify_token', $request->email_token)->first();
+        $user->status = config('const.USER_STATUS.REGISTER');
+        $user->name = $request->name;
+        $user->name_phonetic = $request->name_phonetic;
+        $user->birth_year = $request->birth_year;
+        $user->birth_month = $request->birth_month;
+        $user->birth_day = $request->birth_day;
+        $user->save();
+
+        $this->guard()->login($user);
+
+        return view('auth.registered_main');
     }
 }

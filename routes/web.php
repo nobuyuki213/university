@@ -22,6 +22,7 @@ Route::post('register/pre_check', 'Auth\RegisterController@preCheck')->name('reg
 Route::get('register/verify/{token}', 'Auth\RegisterController@showForm');
 // 本会員確認
 Route::post('register/main_check', 'Auth\RegisterController@mainCheck')->name('register.main.check');
-
+// 本会員登録
+Route::post('register/main_register', 'Auth\RegisterController@mainRegister')->name('register.main.registered');
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -15,10 +15,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 </head>
 <body style="padding-top:4.5rem;">
-    {{-- <div id="app"> --}}
+
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 
-            <!-- Branding Image -->
             <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
             <!-- Collapsed Hamburger -->
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
@@ -44,11 +43,11 @@
                                 {{ Auth::user()->name }}
                             </a>
 
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
-                                    Logout
+                                    ログアウト
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -62,7 +61,7 @@
         </nav>
 
         @yield('content')
-    {{-- </div> --}}
+
     {{-- jquery-3.3.1.slim.min.js --}}
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     {{-- popper.js/1.14.3/ --}}
