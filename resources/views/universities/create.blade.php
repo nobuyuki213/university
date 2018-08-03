@@ -6,9 +6,6 @@
         <h1 class="display-4 text-center">大学登録</h1>
     </div>
 </div>
-
-
-
 <div class="container">
 
 	@if (Session::has('create'))

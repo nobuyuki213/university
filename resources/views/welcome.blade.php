@@ -4,8 +4,7 @@
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
         <h1 class="display-4">メインイメージ</h1>
-        <p class="lead">これは単純なヒーローユニット、注目のコンテンツや情報に特別な注意を喚起するためのシンプルなジャンボトロンスタイルのコンポーネントです。</p>
-        <a class="btn btn-outline-primary btn-lg" href="#" role="button">test</a>
+        {{-- <a class="btn btn-outline-primary btn-lg" href="#" role="button">test</a> --}}
     </div>
 </div>
 <div class="container">
@@ -14,7 +13,7 @@
             <div class="card mb-4 shadow-sm">
                 <img class="card-img-top" src="" alt="カード画像のキャプション">
                 <div class="card-body">
-                    <P class="h3 text-center p-5">学業</p>
+                    <a href="{{ route('school') }}"><P class="h3 text-center p-5">学業</p></a>
                 </div>
             </div>
         </div>

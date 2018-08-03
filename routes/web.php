@@ -28,3 +28,5 @@ Route::get('/', function () {
 
 Route::resource('university', 'UniversitiesController', ['only' => ['index', 'show', 'create', 'store']]);
 
+Route::get('school', 'UniversitiesSearchController@school')->name('school');
+

@@ -2,7 +2,7 @@
     <div class="drawer-container">
         <div class="drawer-navbar-header">
 
-            <a class="drawer-brand" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
+            <a class="drawer-brand" href="{{ url('/') }}">LOGO</a>
 
             <button type="button" class="drawer-toggle drawer-hamburger">
                 <span class="sr-only">toggle navigation</span>
@@ -12,7 +12,7 @@
         </div>
         <nav class="drawer-nav" role="navigation">
             <ul class="drawer-menu drawer-menu--left">
-                <li><a class="drawer-menu-item" href="#">leftNav1</a></li>
+                <li><a class="drawer-menu-item" href="{{ route('university.create') }}">大学登録(仮組)</a></li>{{-- 仮作成 --}}
             </ul>
             <ul class="drawer-menu drawer-menu--right">
             @guest
