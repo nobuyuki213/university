@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 // 仮会員確認
 Route::post('register/pre_check', 'Auth\RegisterController@preCheck')->name('register.pre_check');
@@ -26,3 +22,9 @@ Route::post('register/main_check', 'Auth\RegisterController@mainCheck')->name('r
 Route::post('register/main_register', 'Auth\RegisterController@mainRegister')->name('register.main.registered');
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::resource('university', 'UniversitiesController', ['only' => ['index', 'show', 'create', 'store']]);
+
