@@ -24,8 +24,9 @@
 
         @yield('content')
 
+
         {{-- jquery-3.3.1.slim.min.js --}}
-        {{-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> --}}
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         {{-- popper.js/1.14.3/ --}}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         {{-- bootstrap.min.js 4.1.3 --}}
@@ -36,9 +37,6 @@
         <script src="{{ asset('js/iscroll.js') }}"></script>
         <!-- drawer.min.js Scripts -->
         <script src="{{ asset('js/drawer.min.js') }}"></script>
-        <!-- dropdown.js Scripts -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
         <script>
         $(document).ready(function() {
           $('.drawer').drawer();

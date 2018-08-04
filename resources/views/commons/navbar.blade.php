@@ -19,25 +19,30 @@
                 <li><a class="drawer-menu-item" href="{{ route('login') }}">ログイン</a></li>
                 <li><a class="drawer-menu-item" href="{{ route('register') }}">会員登録</a></li>
             @else
-                <li class="drawer-dropdown">
-                    <a class="drawer-menu-item" href="#" data-toggle="dropdown" role="button" aria-expanded="false">
-                        {{ Auth::user()->name }} <span class="drawer-caret"></span>
-                    </a>
-                    <ul class="drawer-dropdown-menu">
-                        <li>
-                            <a class="drawer-dropdown-menu-item" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                         document.getElementById('logout-form').submit();">
-                                ログアウト
-                            </a>
+                <li>
+                    <div class="dropdown">
+                      <!-- 切替ボタンの設定 -->
+                      <a class="drawer-menu-item dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ Auth::user()->name }}
+                      </a>
+                      <!-- ドロップメニューの設定 -->
+                      <div class="dropdown-menu w-100 border-0" aria-labelledby="dropdownMenuLink">
+                        <a class="drawer-menu-item" href="{{ route('user.show', ['id' => Auth::user()->id]) }}">マイページ</a>
+                        <a class="drawer-menu-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                     document.getElementById('logout-form').submit();">
+                            ログアウト
+                        </a>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                {{ csrf_field() }}
-                            </form>
-                        </li>
-                        <li><a class="drawer-dropdown-menu-item" href="#">Dropdown nav1</a></li>
-                    </ul>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                        <a class="drawer-menu-item" href="#">メニュー2</a>
+                        <a class="drawer-menu-item" href="#">メニュー3</a>
+                      </div><!-- /.dropdown-menu -->
+                    </div><!-- /.dropdown -->
                 </li>
+
             @endguest
             </ul>
         </nav>

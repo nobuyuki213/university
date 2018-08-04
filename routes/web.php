@@ -26,6 +26,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::resource('user', 'UsersController', ['only' => ['show']]);
+
 Route::resource('university', 'UniversitiesController', ['only' => ['index', 'show', 'create', 'store']]);
 
 Route::get('school', 'UniversitiesSearchController@school')->name('school');
