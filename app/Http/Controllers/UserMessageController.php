@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 
-class UsersController extends Controller
+class UserMessageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -33,9 +33,19 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        // ログイン済みの確認
+        if (\Auth::check()) {
+            // message のバリデーション
+            $request->validate([
+                'message' => 'required|string|max:140',
+            ]);
+            // message の送信(保存) 実行
+            \Auth::user()->messageSend($request, $id);
+
+            return redirect()->back()->with('send', 'メッセージを送信しました');
+        }
     }
 
     /**
@@ -44,22 +54,19 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         //
-        $user = User::find($id);
-        $sent_msgs = $user->sendings()->get();
-        $receive_msgs = $user->receivings()->get();
-
-        // dd($sent_msgs);
-
-        $data = [
-            'user' => $user,
-            'sent_msgs' => $sent_msgs,
-            'receive_msgs' => $receive_msgs,
-        ];
-
-        return view('users.show', $data);
+        if (\Auth::check()){
+            $user = User::find($id);
+            $all_messages = $user->sendAndReceives($request->user)->get();
+            // dd($all_message);
+            return view('users.messages', [
+                'user' => $user,
+                'part_user' => User::find($request->user),
+                'all_messages' => $all_messages,
+            ]);
+        }
     }
 
     /**

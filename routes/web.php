@@ -28,6 +28,13 @@ Route::get('/', function () {
 
 Route::resource('user', 'UsersController', ['only' => ['show']]);
 
+Route::group(['prefix' => 'user/{user_id}'], function(){
+	Route::post('sending', 'UserMessageController@store')->name('user.sending');
+	Route::get('messages', 'UserMessageController@show')->name('user.messages');
+});
+
+
+
 Route::resource('university', 'UniversitiesController', ['only' => ['index', 'show', 'create', 'store']]);
 
 Route::get('school', 'UniversitiesSearchController@school')->name('school');

@@ -15,8 +15,8 @@
 				<div class="col-md-4 mb-4">
 					<a href="#" class="">
 						<div class="hvr-float university-item card border-primary w-100">
-							<div class="card-body text-center">
-								<p class="mb-0">{{ $university->name }}</p>
+							<div class="card-body">
+								<p class="mb-0 text-center">{{ $university->name }}</p>
 							</div>
 						</div>
 					</a>
