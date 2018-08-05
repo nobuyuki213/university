@@ -58,11 +58,35 @@
 			<small>（入力例）http://www.hirokoku-u.ac.jp</small>
 		</div>
 
-		<div class="submit text-center">
+		<div class="submit-form text-center">
 			{{ Form::button('入力内容を登録する', ['class' => 'btn btn-outline-success', 'type' => 'submit']) }}
 		</div>
 
 		{{ Form::close() }}
 	</div>
+
+	<div class="universities mb-3">
+		<div class="card">
+			<div class="card-header bg-transparent ">
+				<h4 class="mb-0 text-center">大学一覧</h4>
+			</div>
+			<div class="dept-list card-body">
+			@if (count($universities) > 0)
+				<div class="row">
+				@foreach ($universities as $univer)
+					<div class="col-lg-3 col-md-4 col-6">
+						<div class="card border border-primary mb-3">
+							<div class="card-body">
+								<p class="mb-0 text-primary text-center">{{ $univer->name }}</p>
+							</div>
+						</div>
+					</div>
+				@endforeach
+				</div>
+			@endif
+			</div>
+		</div>
+	</div>
+
 </div>
 @endsection
