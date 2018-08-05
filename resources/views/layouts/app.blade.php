@@ -9,7 +9,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
-        {{-- bootstrap.min.css 4.1.3 --}}
+        {{-- bootstrap.min.css 4.1.2 --}}
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.2/lux/bootstrap.min.css">
         <!--drawer Css -->
         <link href="{{ asset('css/drawer.min.css') }}" rel="stylesheet">
@@ -17,6 +17,8 @@
         <link href="{{ asset('css/style.css') }}" rel="stylesheet">
         <!--hover Css -->
         <link href="{{ asset('css/hover-min.css') }}" rel="stylesheet">
+
+        @yield('stylesheet')
         {{-- Font Awesome --}}
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     </head>
@@ -44,5 +46,6 @@
           $('.drawer').drawer();
         });
         </script>
+        @yield('script')
     </body>
 </html>

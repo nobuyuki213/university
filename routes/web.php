@@ -27,6 +27,7 @@ Route::get('/', function () {
 });
 
 Route::resource('user', 'UsersController', ['only' => ['show']]);
+Route::post('avatar', 'UploadController@updateAvatar')->name('avatar.update');
 
 Route::group(['prefix' => 'user/{user_id}'], function(){
 	Route::post('sending', 'UserMessageController@store')->name('user.sending');

@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@section('stylesheet')
+	{{-- user avatar upload CSS --}}
+	<link rel="stylesheet" type="text/css" href="https://unpkg.com/file-upload-with-preview/dist/file-upload-with-preview.min.css">
+@endsection
+
 @section('content')
 
 	@include('commons.user_show_header')
@@ -50,3 +55,11 @@
 	</div>
 </div>
 @endsection
+
+@section('script')
+	{{-- user avatar upload sprict --}}
+	<script src="https://unpkg.com/file-upload-with-preview"></script>
+	<script>
+		var upload = new FileUploadWithPreview('myUniqueUploadId')
+	</script>
+@endsection()

@@ -48,6 +48,11 @@ class User extends Authenticatable
                     ->withTimestamps();
     }
 
+    /**
+     * [sendAndReceives ユーザーと別のユーザーの送受信メッセージ全てを取得]
+     * @param  [type] $userId [メッセージ相手のid]
+     * @return [type]         [description]
+     */
     public function sendAndReceives($userId)
     {
         return  \DB::table('user_message')->whereIn('user_id', [$this->id, $userId])->whereIn('message_id', [$this->id, $userId]);
@@ -56,7 +61,7 @@ class User extends Authenticatable
     /**
      * [messageSend ユーザーがメッセージを送信する(保存)]
      * @param  Request $requsrt [description]
-     * @param  [type]  $userId  [description]
+     * @param  [type]  $userId  [メッセージ相手のid]
      * @return [type]           [description]
      */
     public function messageSend($request, $userId)
