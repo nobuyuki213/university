@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Dept;
+use App\Faculty;
 
-class DeptsController extends Controller
+class FacultiesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,12 +25,12 @@ class DeptsController extends Controller
     public function create()
     {
         //
-        $dept = new Dept();
-        $depts = Dept::all();
+        $faculty = new Faculty();
+        $faculties = Faculty::all();
 
-        return view('depts.create', [
-            'dept' => $dept,
-            'depts' => $depts,
+        return view('faculties.create', [
+            'faculty' => $faculty,
+            'faculties' => $faculties,
         ]);
     }
 
@@ -44,14 +44,14 @@ class DeptsController extends Controller
     {
         //
         $this->validate($request, [
-            'name' => 'required|string|unique:depts|max:191',
+            'name' => 'required|string|unique:faculties|max:191',
         ]);
 
-        $dept = new Dept();
-        $dept->name = $request->name;
-        $dept->save();
+        $faculty = new Faculty();
+        $faculty->name = $request->name;
+        $faculty->save();
 
-        return redirect()->back()->with('dept_create', $dept->name . ' を登録しました');
+        return redirect()->back()->with('faculty_create', $faculty->name . ' を登録しました');
     }
 
     /**

@@ -8,12 +8,12 @@
 </div>
 <div class="container">
 
-	@if (Session::has('dept_create'))
-	<div class="alert alert-success test-center">{{ session('dept_create') }}</div>
+	@if (Session::has('faculty_create'))
+	<div class="alert alert-success test-center">{{ session('faculty_create') }}</div>
 	@endif
 
-	<div class="dept-create mb-3">
-		{!! Form::model($dept, ['route' => 'dept.store']) !!}
+	<div class="faculty-create mb-3">
+		{!! Form::model($faculty, ['route' => 'faculty.store']) !!}
 
 		<div class="form-group">
 			{!! Form::label('name', '学部名', ['class' => 'col-form-lable']) !!}
@@ -30,19 +30,19 @@
 		{!! Form::close() !!}
 	</div>
 
-	<div class="depts mb-3">
+	<div class="faculties mb-3">
 		<div class="card">
 			<div class="card-header bg-transparent ">
 				<h4 class="mb-0 text-center">学部一覧</h4>
 			</div>
-			<div class="dept-list card-body">
-			@if (count($depts) > 0)
+			<div class="faculty-list card-body">
+			@if (count($faculties) > 0)
 				<div class="row">
-				@foreach ($depts as $dept)
+				@foreach ($faculties as $faculty)
 					<div class="col-lg-3 col-md-4 col-6">
 						<div class="card border border-primary mb-3">
 							<div class="card-body">
-								<p class="mb-0 text-primary text-center">{{ $dept->name }}</p>
+								<p class="mb-0 text-primary text-center">{{ $faculty->name }}</p>
 							</div>
 						</div>
 					</div>

@@ -38,7 +38,7 @@ Route::group(['prefix' => 'user/{user_id}'], function(){
 
 Route::resource('university', 'UniversitiesController', ['only' => ['index', 'show', 'create', 'store']]);
 
-Route::resource('dept', 'DeptsController', ['only' => ['create', 'store']]);
+Route::resource('faculty', 'FacultiesController', ['only' => ['create', 'store']]);
 
 Route::get('school', 'UniversitiesSearchController@school')->name('school');
 
