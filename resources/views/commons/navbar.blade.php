@@ -13,9 +13,7 @@
         <nav class="drawer-nav" role="navigation">
             <ul class="drawer-menu drawer-menu--left">
                 <li><a class="drawer-menu-item" href="{{ route('university.create') }}">大学登録(仮組)</a></li>{{-- 仮作成 --}}
-            </ul>
-            <ul class="drawer-menu drawer-menu--left">
-                <li><a class="drawer-menu-item" href="{{ route('faculty.create') }}">学部登録(仮組)</a></li>{{-- 仮作成 --}}
+                <li><a class="drawer-menu-item" href="{{ route('faculty.create') }}">学部名M登録(仮組)</a></li>{{-- 仮作成 --}}
             </ul>
             <ul class="drawer-menu drawer-menu--right">
             @guest

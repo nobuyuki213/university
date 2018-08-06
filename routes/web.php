@@ -35,8 +35,15 @@ Route::group(['prefix' => 'user/{user_id}'], function(){
 });
 
 
-
 Route::resource('university', 'UniversitiesController', ['only' => ['index', 'show', 'create', 'store']]);
+Route::group(['prefix' => 'university/{id}'], function(){
+	// 大学の学部を選択するページ
+	Route::get('select_faculty', 'FacultyContentsController@create')->name('select.faculty');
+	Route::post('add_faculty', 'FacultyContentsController@store')->name('add.faculty');
+	Route::get('edit_faculty', 'FacultyContentsController@edit')->name('edit.faculty');
+	Route::put('update_faculty', 'FacultyContentsController@update')->name('update.faculty');
+
+});
 
 Route::resource('faculty', 'FacultiesController', ['only' => ['create', 'store']]);
 
