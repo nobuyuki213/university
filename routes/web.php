@@ -34,6 +34,8 @@ Route::group(['prefix' => 'user/{user_id}'], function(){
 	Route::get('messages', 'UserMessageController@show')->name('user.messages');
 });
 
+Route::resource('faculty', 'FacultiesController', ['only' => ['create', 'store']]);
+Route::resource('course', 'CoursesController', ['only' => ['create', 'store']]);
 
 Route::resource('university', 'UniversitiesController', ['only' => ['index', 'show', 'create', 'store']]);
 Route::group(['prefix' => 'university/{id}'], function(){
@@ -44,8 +46,10 @@ Route::group(['prefix' => 'university/{id}'], function(){
 	Route::put('update_faculty', 'FacultyContentsController@update')->name('update.faculty');
 
 });
+Route::group(['prefix' => 'faculty/{id}'], function(){
 
-Route::resource('faculty', 'FacultiesController', ['only' => ['create', 'store']]);
+});
+
 
 Route::get('school', 'UniversitiesSearchController@school')->name('school');
 
