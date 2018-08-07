@@ -17,7 +17,7 @@
 
 		<div class="form-group">
 			{!! Form::label('name', '大学名', ['class' => 'font-weight-bold']) !!}
-			{!! Form::text('name', old('name'), ['class' => $errors->has('name') ? 'form-control is-invalid' : 'form-control border-secondary border-bottom', 'required','autofocus']) !!}
+			{!! Form::text('name', old('name'), ['required','autofocus', 'class' => $errors->has('name') ? 'form-control is-invalid' : 'form-control border-secondary border-bottom']) !!}
 			@if ($errors->has('name'))
 				<span class="invalid-feedback"><strong>{{ $errors->first('name') }}</strong></span>
 			@endif
@@ -25,7 +25,7 @@
 
 		<div class="form-group">
 			{!! Form::label('description', '大学の説明') !!}
-			{!! Form::textarea('description', old('description'), ['class' => $errors->has('description') ? 'form-control is-invalid' : 'form-control border-secondary border-bottom', 'required']) !!}
+			{!! Form::textarea('description', old('description'), ['required', 'class' => $errors->has('description') ? 'form-control is-invalid' : 'form-control border-secondary border-bottom']) !!}
 			@if ($errors->has('description'))
 				<span class="invalid-feedback"><strong>{{ $errors->first('description') }}</strong></span>
 			@endif
@@ -33,7 +33,7 @@
 
 		<div class="form-group">
 			{!! Form::label('address', '住所') !!}
-			{!! Form::text('address', old('address'), ['class' => $errors->has('address') ? 'form-control is-invalid' : 'form-control border-secondary border-bottom', 'required']) !!}
+			{!! Form::text('address', old('address'), ['required', 'class' => $errors->has('address') ? 'form-control is-invalid' : 'form-control border-secondary border-bottom']) !!}
 			@if ($errors->has('address'))
 				<span class="invalid-feedback"><strong>{{ $errors->first('address') }}</strong></span>
 			@endif
@@ -42,7 +42,7 @@
 
 		<div class="form-group">
 			{!! Form::label('phone_number', '電話番号') !!}
-			{!! Form::text('phone_number', old('phone_number'), ['class' => $errors->has('phone_number') ? 'form-control is-invalid' : 'form-control border-secondary border-bottom', 'required']) !!}
+			{!! Form::text('phone_number', old('phone_number'), ['required', 'class' => $errors->has('phone_number') ? 'form-control is-invalid' : 'form-control border-secondary border-bottom']) !!}
 			@if ($errors->has('phone_number'))
 				<span class="invalid-feedback"><strong>{{ $errors->first('phone_number') }}</strong></span>
 			@endif
@@ -51,7 +51,7 @@
 
 		<div class="form-group">
 			{!! Form::label('url', '公式サイト') !!}
-			{!! Form::text('url', old('url'), ['class' => $errors->has('url') ? 'form-control is-invalid' : 'form-control border-secondary border-bottom', 'required']) !!}
+			{!! Form::text('url', old('url'), ['required', 'class' => $errors->has('url') ? 'form-control is-invalid' : 'form-control border-secondary border-bottom']) !!}
 			@if ($errors->has('url'))
 				<span class="invalid-feedback"><strong>{{ $errors->first('url') }}</strong></span>
 			@endif

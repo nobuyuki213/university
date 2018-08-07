@@ -18,6 +18,15 @@ class University extends Model
 	{
 		return $this->hasMany(FacultyContent::class);
 	}
+
+	/**
+	 * [courseContents 大学に属する複数の学部コンテンツにさらに属する学科コンテンツを取得するリレーション定義]
+	 * @return [type] [description]
+	 */
+	public function courseContents()
+	{
+		return $this->hasManyThrough(CourseContent::class, FacultyContent::class);
+	}
 }
 
 
