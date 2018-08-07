@@ -63,7 +63,6 @@ class FacultyContentsController extends Controller
         $faculty = Faculty::find($request->faculty_id);
 
         $faculty_contens = $university->facultyContents()->create([
-            'university_id' => $university->id,
             'faculty_id' => $faculty->id,
             'overview' => $request->overview,
         ]);
@@ -97,6 +96,7 @@ class FacultyContentsController extends Controller
         $faculty_contents = $university->facultyContents()->with('university', 'faculty')->get();
         // $request で受け取った faculty_id で 編集する faculty を取得する
         $faculty = Faculty::find($request->faculty);
+
         $f_content = FacultyContent::where('university_id', $university->id)->where('faculty_id', $faculty->id)->first();
         // dd($faculty_contents);
 

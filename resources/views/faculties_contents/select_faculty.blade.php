@@ -31,19 +31,27 @@
 							<span class="">登録済学部</span>
 						</div>
 						<div class="card-body">
-						@foreach ($faculty_contents as $key => $faculty_content)
-						<div class="registered-faculty clearfix">
-							<div class="float-right pt-1">
-								{!! Form::open(['route' => ['edit.faculty', $university->id], 'method' => 'get', 'name' => "form_faculty{$key}"]) !!}
-								<input type="hidden" name="faculty" value="{{$faculty_content->faculty->id}}">
-								{!! Form::close() !!}
-								<a href="javascript:form_faculty{{$key}}.submit()"><i class="far fa-edit"></i></a>
+						@if (count($faculty_contents) > 0)
+							@foreach ($faculty_contents as $key => $faculty_content)
+							<div class="registered-faculty clearfix">
+								<div class="float-right pt-1">
+									{!! Form::open(['route' => ['edit.faculty', $university->id], 'method' => 'get', 'name' => "form_faculty{$key}"]) !!}
+									<input type="hidden" name="faculty" value="{{$faculty_content->faculty->id}}">
+									{!! Form::close() !!}
+									<a href="javascript:form_faculty{{$key}}.submit()"><i class="far fa-edit"></i></a>
+								</div>
+								<div class="mb-2 px-3 py-1 border-left border-info">
+									{{ $faculty_content->faculty->name }}
+								</div>
 							</div>
-							<div class="mb-2 px-3 py-1 border-left border-info">
-								{{ $faculty_content->faculty->name }}
+							@endforeach
+						@else
+							<div class="not-faculty">
+								<div class="mb-2 px-3 py-1 border-left border-info">
+									未登録
+								</div>
 							</div>
-						</div>
-						@endforeach
+						@endif
 						</div>
 					</div>
 				</div>
@@ -59,22 +67,22 @@
 								<div class="form-group row">
 									{!! Form::label('faculty_id', '学部名を選択', ['class' => 'col col-form-label my-auto']) !!}
 									<div class="col-lg-10">
-										{!! Form::select('faculty_id', ['' => '<<登録する学部名を選択してください>>']+array_pluck($faculty_names, 'name', 'id'), old('faculty_id'), ['class' => $errors->has('faculty_id') ? 'form-control is-invalid' : 'form-control', 'required', 'autofocus']) !!}
+										{!! Form::select('faculty_id', ['' => '<<登録する学部名を選択してください>>']+array_pluck($faculty_names, 'name', 'id'), old('faculty_id'), ['required', 'autofocus', 'class' => $errors->has('faculty_id') ? 'form-control is-invalid' : 'form-control']) !!}
 										<div class="invalid-feedback">{{ $errors->first('faculty_id') }}</div>
 									</div>
 								</div>
 								<div class="form-group row">
 									{!! Form::label('overview', '学部の説明', ['class' => 'col col-form-label my-auto']) !!}
 									<div class="col-lg-10">
-										{!! Form::textarea('overview', old('overview'), ['class' => $errors->has('overview') ? 'form-control is-invalid' : 'form-control', 'required']) !!}
+										{!! Form::textarea('overview', old('overview'), ['required', 'class' => $errors->has('overview') ? 'form-control is-invalid' : 'form-control']) !!}
 										<div class="invalid-feedback">{{ $errors->first('overview') }}</div>
 									</div>
 								</div>
 								<div class="submit-form text-center">
 									{!! Form::button('入力内容を登録する', ['class' => 'btn btn-outline-success', 'type' => 'submit']) !!}
 								</div>
-							</div>
 							{!! Form::close() !!}
+							</div>
 						</div>
 					</div>
 				</div>

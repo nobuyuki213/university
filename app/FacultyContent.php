@@ -26,4 +26,9 @@ class FacultyContent extends Model
 	{
 		return $this->belongsTo(Faculty::class);
 	}
+
+	public function courseContents()
+	{
+		return $this->hasMany(CourseContent::class);
+	}
 }

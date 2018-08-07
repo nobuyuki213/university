@@ -35,18 +35,23 @@ Route::group(['prefix' => 'user/{user_id}'], function(){
 });
 
 Route::resource('faculty', 'FacultiesController', ['only' => ['create', 'store']]);
-Route::resource('course', 'CoursesController', ['only' => ['create', 'store']]);
+Route::resource('courses', 'CoursesController', ['only' => ['create', 'store']]);
 
 Route::resource('university', 'UniversitiesController', ['only' => ['index', 'show', 'create', 'store']]);
-Route::group(['prefix' => 'university/{id}'], function(){
-	// 大学の学部を選択するページ
-	Route::get('select_faculty', 'FacultyContentsController@create')->name('select.faculty');
+// Route::get('university/{id}/setting', 'UniversitiesController@setting')->name('university.setting');// 大学の設定ページ予定（仮）
+Route::group(['prefix' => 'university/{u_id}'], function(){
+	Route::get('setting_faculty', 'FacultyContentsController@create')->name('setting.faculty');// 大学の学部を選択するページ
 	Route::post('add_faculty', 'FacultyContentsController@store')->name('add.faculty');
 	Route::get('edit_faculty', 'FacultyContentsController@edit')->name('edit.faculty');
 	Route::put('update_faculty', 'FacultyContentsController@update')->name('update.faculty');
 
-});
-Route::group(['prefix' => 'faculty/{id}'], function(){
+	Route::group(['prefix' => 'faculty'], function(){
+		Route::get('select', 'CourseContentsController@select')->name('faculty.select');
+		});
+
+	Route::group(['prefix' => 'faculty/{f_id}'], function(){
+		Route::resource('course', 'CourseContentsController', ['only' => ['create', 'store', 'edit', 'update']]);
+	});
 
 });
 

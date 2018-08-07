@@ -15,13 +15,13 @@
 	@if (Session::has('update_faculty'))
 		<div class="alert alert-warning text-center">
 			<p class="d-inline-block">{{ session('update_faculty') }}</p>
-			<span class="btn btn-success ml-lg-3 d-lg-inline-block d-block">設定画面に戻る</span>
+			<a href="{{ route('setting.faculty', ['u_id' => $university->id]) }}" class="btn btn-success ml-lg-3 d-lg-inline-block d-block">設定画面に戻る</a>
 		</div>
 	@endif
 
 	<div class="universtity-faculty-edit">
 
-				<div class="select-university">
+		<div class="select-university">
 			のちにここに大学を選択して切り替えできるセレクトボックスの設置予定
 		</div>
 		<div class="setting-faculties">
@@ -68,7 +68,7 @@
 									{!! Form::label('overview', '編集する学部の説明', ['class' => 'col col-form-label my-auto']) !!}
 									<div class="col-lg-10">
 										<input type="hidden" name="facultyContent" value="{{ $f_content->id }}">
-										{!! Form::textarea('overview', $f_content->overview, ['class' => $errors->has('overview') ? 'form-control is-invalid' : 'form-control', 'required', 'autofocus']) !!}
+										{!! Form::textarea('overview', $f_content->overview, ['required', 'autofocus', 'class' => $errors->has('overview') ? 'form-control is-invalid' : 'form-control']) !!}
 										<div class="invalid-feedback">{{ $errors->first('overview') }}</div>
 									</div>
 								</div>
@@ -84,6 +84,5 @@
 		</div>
 
 	</div>
-
 
 @endsection

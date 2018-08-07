@@ -13,7 +13,7 @@
 	@endif
 
 	<div class="course-create mb-3">
-		{!! Form::model($course, ['route' => 'course.store']) !!}
+		{!! Form::model($course, ['route' => 'courses.store']) !!}
 
 		<div class="form-group">
 			{!! Form::label('name', '学部名', ['class' => 'col-form-lable']) !!}

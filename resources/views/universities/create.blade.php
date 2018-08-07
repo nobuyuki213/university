@@ -74,15 +74,17 @@
 			@if (count($universities) > 0)
 				<div class="row">
 				@foreach ($universities as $univer)
-					<div class="col-lg-3 col-md-4 col-6">
+					<div class="col-lg-4 col-sm-6">
 						<div class="card border border-primary mb-3">
 							<div class="card-body p-0">
 								<div class="dropdown">
-									<div class="p-3 mb-0 text-primary text-center dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<div class="py-3 mb-0 text-primary text-center dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										{{ $univer->name }}
 									</div>
 									<div class="dropdown-menu border-success" aria-labelledby="dropdownMenuButton">
-										<a class="dropdown-item" href="{{ route('select.faculty', ['id' => $univer->id]) }}">学部設定</a>
+										{{-- <a class="dropdown-item" href="{{ route('university.setting', ['id' => $univer->id]) }}">設定</a> 大学の設定ページ予定（仮）--}}
+										<a class="dropdown-item" href="{{ route('setting.faculty', ['id' => $univer->id]) }}">学部設定</a>
+										<a class="dropdown-item" href="{{ route('faculty.select', ['id' => $univer->id]) }}">学科設定</a>
 										<div class="dropdown-divider"></div>
 									</div><!-- /.dropdown-menu -->
 								</div><!-- /.dropdown -->

@@ -10,4 +10,12 @@ class Course extends Model
     protected $fillable = [
     	'name',
     ];
+    /**
+     * [coursesContents 学科名に属する複数の学科コンテンツを取得するリレーション定義]
+     * @return [type] [description]
+     */
+    public function courseContents()
+    {
+    	return $this->hasMany(CourseContent::class);
+    }
 }
