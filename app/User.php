@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Faculty;
+use App\Course;
 
 class User extends Authenticatable
 {
@@ -28,7 +30,16 @@ class User extends Authenticatable
     ];
 
     /**
-     * [messageSending ユーザーが別のユーザーに送信したメッセージのリレーション定義]
+     * [reviews ユーザーが投稿した複数のレビューを取得するリレーション定義]
+     * @return [type] [description]
+     */
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    /**
+     * [messageSending ユーザーが別のユーザーに送信したメッセージを取得するリレーション定義]
      * @return [type] [description]
      */
     public function sendings()
@@ -37,6 +48,7 @@ class User extends Authenticatable
                     ->withPivot('message')
                     ->withTimestamps();
     }
+
     /**
      * [receivings ユーザーが別のユーザーから受信したメッセージのリレーション定義]
      * @return [type] [description]
@@ -75,6 +87,43 @@ class User extends Authenticatable
             // 自分自身でなければメッセージを送信(保存)する
             $this->sendings()->attach($userId, ['message' => $request->message]);
             return true;
+        }
+    }
+
+
+    public function createReview($request, $universityId)
+    {
+        // dd($faculty = Faculty::find($request->faculty));
+        // $request に body=(総合評価のレビュー本文)が存在し、かつ空でないかを確認
+        if ($request->filled('body')) {
+            // 平均レーティングを計算するために各レーティングを $ratings 変数に配列で追加する
+            if($request->filled('body_rating')) { $ratings[] = $request->body_rating; }//行数を増やさないために一行で記述している
+            // 新しいレーティングを追加した場合、<<ここの行>>に上記のコードを参照して追加する
+            $rating_count = count($ratings); //ratingされた数を取得する
+            $total_rating = 0; // rating の合計数値を計算するために初期値 0 の変数を作る
+            foreach ($ratings as $rating) {
+                $total_rating += $rating;
+            }
+            $avg_rating = round($total_rating / $rating_count);// 四捨五入でrating の平均値 を算出する
+// dd($avg_rating);
+            // ユーザーに紐づくレビューの値を作成して保存
+            $review = $this->reviews()->create([
+                'title' => $request->title,
+                'body' => $request->body,
+                'rating' => $avg_rating,
+            ]);
+            // レビュー紐づく関係性と学部名、学科名も含めて保存
+            $faculty = Faculty::find($request->faculty);
+            $course = Course::find($request->course);
+            $review->universities()->attach($universityId, ['faculty' => $faculty->name, 'course' => $course->name]);
+
+            $data = [
+                'review' => $review,
+            ];
+
+            return $data;
+        } else {
+            return false;
         }
     }
 }

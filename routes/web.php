@@ -52,7 +52,15 @@ Route::group(['prefix' => 'university/{u_id}'], function(){
 	Route::group(['prefix' => 'faculty/{f_id}'], function(){
 		Route::resource('course', 'CourseContentsController', ['only' => ['create', 'store', 'edit', 'update']]);
 	});
+});
 
+Route::group(['prefix' => 'review'], function(){
+	Route::get('select', 'UniversityReviewController@select')->name('university.select');
+	Route::get('input', 'UniversityReviewController@input')->name('review.input');
+	Route::post('comfirm', 'UniversityReviewController@comfirm')->name('review.comfirm');
+
+	Route::resource('review', 'ReviewsController', ['only' => ['store']]);
+	Route::get('complete', 'ReviewsController@complete')->name('review.complete');
 });
 
 

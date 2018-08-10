@@ -10,6 +10,36 @@ class University extends Model
 	protected $fillable = [
 		'name', 'description', 'address', 'phone_number', 'url',
 	];
+
+	/**
+	 * [reviews 大学に該当する複数のレビューと中間テーブルの fculty course を含めて全て取得するリレーション定義]
+	 * @return [type] [description]
+	 */
+	public function reviews()
+	{
+		return $this->belongsToMany(Review::class, 'university_review')
+					->withPivot('faculty', 'course')->withTimestamps();
+	}
+
+	/**
+	 * [facultyReviews 大学に該当し学部名を指定した複数のレビューを取得]
+	 * @param  [type] $faculty [学部インスタンス]
+	 * @return [type]          [description]
+	 */
+	public function facultyReviews($faculty)
+	{
+		return $this->reviews()->where('faculty', $faculty->name);
+	}
+
+	/**
+	 * [courseReviews 大学に該当し学科名を指定した複数のレビューを取得]
+	 * @param  [type] $course [学科インスタンス]
+	 * @return [type]         [description]
+	 */
+	public function courseReviews($course)
+	{
+		return $this->reviews()->where('course', $course->name);
+	}
 	/**
 	 * [faculties 大学に属する複数の学部を取得するリレーション定義]
 	 * @return [type] [description]

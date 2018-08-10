@@ -9,8 +9,6 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
-        {{-- bootstrap.min.css 4.1.2 --}}
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.2/lux/bootstrap.min.css">
         <!--drawer Css -->
         <link href="{{ asset('css/drawer.min.css') }}" rel="stylesheet">
         <!--My Css -->
@@ -19,8 +17,12 @@
         <link href="{{ asset('css/hover-min.css') }}" rel="stylesheet">
 
         @yield('stylesheet')
+
+        {{-- bootstrap.min.css 4.1.2 --}}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.2/lux/bootstrap.min.css">
         {{-- Font Awesome --}}
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+        @yield('stylesheet_fontawesome_after')
     </head>
     <body class="drawer drawer--right drawer--navbarTopGutter" style="padding-top:4.5rem;">
 
@@ -29,7 +31,7 @@
         @yield('content')
 
 
-        {{-- jquery-3.3.1.slim.min.js --}}
+        {{-- jquery-3.2.1.slim.min.js --}}
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         {{-- popper.js/1.14.3/ --}}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
