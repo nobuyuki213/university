@@ -24,7 +24,7 @@ class ReviewController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('大学レビュー管理');
+            $content->header('大学レビュー');
             $content->description('登録されている大学のレビュー一覧です');
 
             $content->body($this->grid());

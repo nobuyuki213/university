@@ -39,6 +39,15 @@ class User extends Authenticatable
     }
 
     /**
+     * [reviewManagements ユーザーが投稿した複数のレビューのレビュー操作管理データを取得するリレーション定義]
+     * @return [type] [description]
+     */
+    public function reviewManagements()
+    {
+        return $this->hasManyThrough(ReviewManagement::class, Review::class);
+    }
+
+    /**
      * [messageSending ユーザーが別のユーザーに送信したメッセージを取得するリレーション定義]
      * @return [type] [description]
      */
@@ -116,6 +125,10 @@ class User extends Authenticatable
             $faculty = Faculty::find($request->faculty);
             $course = Course::find($request->course);
             $review->universities()->attach($universityId, ['faculty' => $faculty->name, 'course' => $course->name]);
+
+            $review_management = $review->reviewManagement()->create([
+                'review_id' => $review->id,
+            ]);
 
             $data = [
                 'review' => $review,

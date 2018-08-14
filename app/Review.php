@@ -21,6 +21,15 @@ class Review extends Model
     }
 
     /**
+     * [reviewManagement レビューに関するレビュー管理を取得する]
+     * @return [type] [description]
+     */
+    public function reviewManagement()
+    {
+        return $this->hasOne(ReviewManagement::class);
+    }
+
+    /**
      * [universities レビューに該当する複数の大学と中間テーブルの fculty course を含めて全て取得するリレーション定義]
      * @return [type] [description]
      */

@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\User;
+use DB;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\ModelForm;
 use Encore\Admin\Form;
@@ -61,6 +62,11 @@ class UserController extends Controller
                 $show->reviews($user->name . 'さんのレビュー一覧', function($reviews) {
                     $reviews->id('ID');
                     $reviews->title('タイトル');
+                    $reviews->reviewManagement()->is_approved('承認済みか');
+
+                    // 操作パネル非表示設定
+                    $reviews->disableCreateButton();
+                    $reviews->disableRowSelector();
                 });
 
                 $show->created_at();
@@ -111,10 +117,17 @@ class UserController extends Controller
     {
         return Admin::grid(User::class, function (Grid $grid) {
 
-            $grid->id('ID')->sortable();
+            // $grid->id('ID')->sortable(); // 累計ポイント表示のためIDを非表示する
             // 表示項目を追加
             $grid->column('name', '氏名');
             $grid->column('email', 'メールアドレス');
+            $grid->reviews('レビュー数')->display(function ($review) {
+                return count($review);
+            })->label('primary');
+
+            $grid->id('所有ポイント')->display(function ($userId) {
+                return User::findOrFail($userId)->reviewManagements()->where('is_approved', '1')->sum('points');
+            });
 
             $grid->created_at();
             $grid->updated_at();
