@@ -18,10 +18,10 @@ class CreateReviewManagementsTable extends Migration
             $table->integer('review_id')->unsigned()->index(); // ・「どの口コミ」を
             $table->datetime('approved_date')->nullable(); //・「いつ（承認された日）」
             $table->boolean('is_approved')->default('0'); //・「承認したか（承認フラグ）」
-            $table->string('approved_admin')->nullable(); //（・複数管理者であれば、「承認処理したのはどの管理者」）
+            $table->integer('approved_admin_id')->nullable(); //（・複数管理者であれば、「承認処理したのはどの管理者」）
             $table->datetime('points_date')->nullable(); //・「いつ（ポイント付与された日）」
             $table->integer('points')->nullable(); // ・「何ポイント付与した（ポイント数）」
-            $table->string('granted_admin')->nullable(); // （・複数管理者であれば、「ポイント付与したのはどの管理者」）
+            $table->integer('granted_admin_id')->nullable(); // （・複数管理者であれば、「ポイント付与したのはどの管理者」）
             $table->timestamps();
         });
     }

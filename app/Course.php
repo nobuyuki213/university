@@ -18,4 +18,13 @@ class Course extends Model
     {
     	return $this->hasMany(CourseContent::class);
     }
+
+    /**
+     * [Lessons 学科名に属する複数の授業を取得するリレーション定義]
+     * @return [type] [description]
+     */
+    public function lessons()
+    {
+        return $this->hasMany(Lesson::class);
+    }
 }

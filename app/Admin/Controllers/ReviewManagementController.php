@@ -106,10 +106,10 @@ class ReviewManagementController extends Controller
                     '0' => '<span class="text-danger">未承認</span>'
                 ])
                 ->sortable();
-            $grid->approved_admin('承認処理者');
+            $grid->approved_admin('承認処理管理者(ID)');
             $grid->points_date('ポイント付与された時刻');
             $grid->points('ポイント数');
-            $grid->granted_admin('ポイント付与者');
+            $grid->granted_admin('ポイント付与管理者(ID)');
             $grid->created_at();
             $grid->updated_at();
             // フィルター検索機能の項目を追加
@@ -147,8 +147,8 @@ class ReviewManagementController extends Controller
                     'off' => ['value' => 0, 'text' => '未承認', 'color' => 'danger'],
                 ];
                 $form->switch('is_approved', '承認したか')->states($states);
-                $form->text('approved_admin', '承認処理者')
-                    ->default(Admin::user()->name)->attribute('readonly');
+                $form->text('approved_admin', '承認処理管理者(ID)')
+                    ->default(Admin::user()->id)->attribute('readonly');
 
             })->tab('ポイント', function($form) {
                 $form->display('id', 'ID');
@@ -157,8 +157,8 @@ class ReviewManagementController extends Controller
                 $form->datetime('points_date', 'ポイント付与された日')
                     ->default(now())->attribute('readonly');
                 $form->number('points', 'ポイント数');
-                $form->text('granted_admin', 'ポイント付与者者')
-                    ->default(Admin::user()->name)->attribute('readonly');
+                $form->text('granted_admin', 'ポイント付与管理者(ID)')
+                    ->default(Admin::user()->id)->attribute('readonly');
 
             });
 
