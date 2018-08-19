@@ -37,7 +37,9 @@
 				<option value="">大学を選択</option>
 				@foreach ($univer->facultyContents as $f_content)
 					@foreach ($f_content->courseContents as $c_content)
-						<option value="{{ $univer->id . ',' . $f_content->faculty->id . ',' . $c_content->course->id}}">{{ $univer->name .' > '. $f_content->faculty->name .' > '. $c_content->course->name }}</option>
+						@foreach ($c_content->course->lessons as $lesson)
+							<option value="{{ $univer->id . ',' . $f_content->faculty->id . ',' . $c_content->course->id}}">{{ $univer->name .' > '. $f_content->faculty->name .' > '. $c_content->course->name . ' > ' . $lesson->name }}</option>
+						@endforeach
 					@endforeach
 				@endforeach
 			</select>
@@ -50,7 +52,7 @@
 				{!! Html::decode(Form::label('provider', '<a href="#">利用規約</a>を同意の上、レビューする', ['class' => 'custom-control-label'])) !!}
 			</div>
 		</div> --}}
-		<div class="submit-form text-center">
+		<div class="submit-form text-center mt-5">
 			{!! Form::button('レビューを書く', ['class' => 'btn btn-outline-primary', 'type' => 'submit', 'id' => 'submitbtn']) !!}
 		</div>
 

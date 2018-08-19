@@ -23,7 +23,7 @@ class UniversityReviewController extends Controller
 
     public function select()
     {
-        $universities = University::with('facultyContents', 'courseContents')->get();
+        $universities = University::with('facultyContents', 'courseContents', 'lessons')->get();
 
         $faculties = Faculty::all();
         $courses = Course::all();
