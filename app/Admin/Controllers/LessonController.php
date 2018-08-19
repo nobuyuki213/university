@@ -6,6 +6,7 @@ use App\Lesson;
 use App\University;
 use App\Faculty;
 use App\Course;
+use App\Tag;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\ModelForm;
 use Encore\Admin\Form;
@@ -52,6 +53,7 @@ class LessonController extends Controller
                 $show->id();
                 // 表示項目の追加
                 $show->name('授業名');
+                $show->school_year('学年');
 
                 $show->created_at();
                 $show->updated_at();
@@ -90,6 +92,23 @@ class LessonController extends Controller
                         ->tools(function ($tools) {
                             $tools->disableDelete();
                         });
+                });
+
+                $show->tags('【' . $lesson->name . '】に属するのタグ一覧', function ($tags) {
+                    $tags->resource('/admin/auth/tags');
+                    // 表示項目の追加
+                    $tags->id('タグID');
+                    $tags->name('タグ名');
+                    // 操作パネルの非表示設定
+                    $tags->disableCreateButton();
+                    $tags->actions(function ($actions) {
+                        $actions->disableDelete();
+                        $actions->disableEdit();
+                    });
+                    // フィルター機能の追加
+                    $tags->filter(function ($filter) {
+                        $filter->like('name', 'タグ名');
+                    });
                 });
 
             }));
@@ -141,6 +160,7 @@ class LessonController extends Controller
             $grid->id('ID')->sortable();
             // 表示項目の追加
             $grid->name('授業名');
+            $grid->school_year('学年');
             $grid->university()->name('大学名');
             $grid->faculty()->name('学部名');
             $grid->course()->name('学科名');
@@ -182,7 +202,7 @@ class LessonController extends Controller
                 ->attribute('required')
                 ->help('（記入例）山田 太郎');
             $form->text('textbook_name', '教科書名')
-                ->rules('required|string|max:20')
+                ->rules('required|string|max:191')
                 ->attribute(['class' => 'form-control input-lg'])
                 ->attribute('required');
             $form->divide();
@@ -203,16 +223,23 @@ class LessonController extends Controller
             $form->switch('is_final_report', '期末レポートがあるか？')->states($states);
             $form->divide();
 
+            $form->textarea('test_range', 'テスト範囲(出題傾向)')
+                ->rules('required|string|max:700')
+                ->attribute(['class' => 'form-control input-lg'])
+                ->attribute('required');
+            $form->divide();
+
             $attend = ['取らない' => '取らない', '時々取る' => '時々取る', 'ほぼ毎回取る' => 'ほぼ毎回取る', '取る' => '取る',];
             $form->radio('attend', '出席')->options($attend);
             $form->text('attendance_method', '出席方法')
                 ->rules('required|string|max:50')
                 ->attribute(['class' => 'form-control input-lg'])
                 ->attribute('required');
-            $form->textarea('test_range', 'テスト範囲(出題傾向)')
-                ->rules('required|string|max:700')
-                ->attribute(['class' => 'form-control input-lg'])
-                ->attribute('required');
+            $form->divide();
+
+            $form->multipleSelect('tags', 'タグ付け')->options(Tag::all()->pluck('name', 'id'));
+            $form->divide();
+
             $form->textarea('remarks', '備考')
                 ->rules('string|max:500')
                 ->attribute(['class' => 'form-control input-lg']);

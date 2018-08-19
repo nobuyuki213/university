@@ -37,4 +37,59 @@ class Lesson extends Model
     {
     	return $this->belongsTo(Course::class);
     }
+
+    /**
+     * [tags 授業に紐づいている複数のタグを取得するリレーション定義]
+     * @return [type] [description]
+     */
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'lesson_tag', 'lesson_id', 'tag_id')->withTimestamps();
+    }
+
+    /**
+     * [scopesearch 授業絞り込み処理]
+     * @param  [type] $query   [description]
+     * @param  [type] $request [description]
+     * @return [type]          [description]
+     */
+    public function scopesearch($query, $request)
+    {
+        $lessons_query = self::query();
+        $hasParam = true;
+
+        if ($request->all()) {
+            if ($request->has('course_ids')) {
+                $lessons = $lessons_query->whereIn('course_id', $request->course_ids);
+            }
+            if ($request->has('school_years')) {
+                $lessons = $lessons_query->whereIn('school_year', $request->school_years);
+            }
+            // タグの絞り込み検索は、タグ内で and検索 となる
+            if ($request->has('tag_ids')) {
+                $lessons = $lessons_query->whereHas('tags', function ($query) use ($request) {
+                    foreach ($request->tag_ids as $key => $tag_id) {
+                        $query->where('tags.id', $tag_id);
+                    }
+                });
+            }
+
+            $lessons = $lessons_query->get();
+
+        } else {
+            $hasParam = false;
+            $lessons = $lessons_query;
+        }
+
+        $data = [];
+
+        if ($lessons->count() <= 0 && $hasParam) {
+            $data['message'] = '該当する授業はありませんでした。';
+        } else {
+            $data['message'] = "";
+        }
+        $data['lessons'] = $lessons;
+
+        return $data;
+    }
 }

@@ -13,7 +13,7 @@
 			<div class="row">
 			@foreach ($universities as $university)
 				<div class="col-md-4 mb-4">
-					<a href="#" class="">
+					<a href="{{ route('university.show', ['id' => $university->id]) }}" class="">
 						<div class="hvr-float university-item card border-primary w-100">
 							<div class="card-body">
 								<p class="mb-0 text-center">{{ $university->name }}</p>

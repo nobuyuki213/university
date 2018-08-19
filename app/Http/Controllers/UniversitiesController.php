@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\University;
+use App\Lesson;
+use App\Tag;
 
 class UniversitiesController extends Controller
 {
@@ -67,9 +69,33 @@ class UniversitiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        // 授業の絞り込み処理を実行
+        $search_lessons = Lesson::search($request);
+        $message = $search_lessons['message'];
+        $search_lessons = $search_lessons['lessons'];
+
+        // $request の中にある[学科のids][学年][タグのids] を変数に代入する
+        $course_ids = $request->course_ids;
+        $school_years = $request->school_years;
+        $tag_ids = $request->tag_ids;
+
+        $university = University::with('courseContents')->get()->find($id);
+        $lessons = University::find($id)->lessons->all();
+        $tags = Tag::all();
+        // dd($lessons);
+
+        if ($message) {
+            return view('universities.show',
+                compact('university', 'lessons', 'tags', 'course_ids', 'school_years', 'tag_ids', 'search_lessons', 'message')
+            );
+        } else {
+            return view('universities.show',
+                compact('university', 'lessons', 'tags', 'course_ids', 'school_years', 'tag_ids', 'search_lessons')
+            );
+        }
+
     }
 
     /**

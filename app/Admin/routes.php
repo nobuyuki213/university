@@ -19,6 +19,7 @@ Route::group([
     $router->resource('auth/coursecontent', CourseContentController::class);
     $router->resource('auth/review', ReviewController::class);
     $router->resource('auth/reviewmanagement', ReviewManagementController::class);
-    $router->resource('auth/lesson', LessonController::class);
+    $router->resource('auth/lessons', LessonController::class);
+    $router->resource('auth/tags', TagController::class);
 
 });

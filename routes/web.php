@@ -66,3 +66,4 @@ Route::group(['prefix' => 'review'], function(){
 
 Route::get('school', 'UniversitiesSearchController@school')->name('school');
 
+Route::resource('lesson', 'LessonsController', ['only' => ['show']]);
