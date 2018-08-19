@@ -30,7 +30,7 @@
 
 			<div class="selected-review-university">
 				<div class="row">
-					<div class="col-lg-4 mb-lg-3 mb-1">
+					<div class="col-lg-6 mb-lg-3 mb-1">
 						<div class="card border-primary">
 							<div class="card-boby p-2">
 								<span class="">select:</span> <h5 class="d-inline-block mb-0">{{ $university->name }}</h5>
@@ -38,7 +38,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-4 mb-lg-3 mb-1">
+					<div class="col-lg-6 mb-lg-3 mb-1">
 						<div class="card border-primary">
 							<div class="card-boby p-2">
 								<span class="">select:</span> <h5 class="d-inline-block mb-0">{{ $faculty->name }}</h5>
@@ -46,11 +46,19 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-4 mb-lg-3 mb-1">
+					<div class="col-lg-6 mb-lg-3 mb-1">
 						<div class="card border-primary">
 							<div class="card-boby p-2">
 								<span class="">select:</span> <h5 class="d-inline-block mb-0">{{ $course->name }}</h5>
 								<input type="hidden" name="course" value="{{ $course->id }}">
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6 mb-lg-3 mb-1">
+						<div class="card border-primary">
+							<div class="card-boby p-2">
+								<span class="">select:</span> <h5 class="d-inline-block mb-0">{{ $lesson->name }}</h5>
+								<input type="hidden" name="lesson" value="{{ $lesson->id }}">
 							</div>
 						</div>
 					</div>

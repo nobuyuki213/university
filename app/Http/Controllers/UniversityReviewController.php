@@ -8,6 +8,7 @@ use App\Faculty;
 use App\FacultyContent;
 use App\Course;
 use App\CourseContent;
+use App\Lesson;
 
 class UniversityReviewController extends Controller
 {
@@ -33,6 +34,11 @@ class UniversityReviewController extends Controller
         );
     }
 
+    /**
+     * [input description]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
     public function input(Request $request)
     {
         // dd($request->all());
@@ -42,16 +48,17 @@ class UniversityReviewController extends Controller
         // 配列で届く値を分けて使いやすくするため連想配列にする
         $ids = explode(',',$request->select);
         // dd($ids);
-        if ($ids[0] && !empty($ids[1]) && !empty($ids[2])) {
+        if ($ids[0] && !empty($ids[1]) && !empty($ids[2]) && !empty($ids[3])) {
             $university = University::find($ids[0]);
             $faculty = Faculty::find($ids[1]);
             $course = Course::find($ids[2]);
+            $lesson = Lesson::find($ids[3]);
 
             return view('reviews.review_input',
-                compact('university', 'faculty', 'course')
+                compact('university', 'faculty', 'course', 'lesson')
             );
         } else {
-            return redirect()->back()->with('error', '大学、学部、学科のいずれかを選ばれていません');
+            return redirect()->back()->with('error', '大学、学部、学科、授業のいずれかを選ばれていません');
         }
     }
 
@@ -69,9 +76,10 @@ class UniversityReviewController extends Controller
             $university = University::find($request->university);
             $faculty = Faculty::find($request->faculty);
             $course = Course::find($request->course);
+            $lesson = Lesson::find($request->lesson);
             // dd($faculty);
             return view('reviews.review_confirm',
-                compact('request', 'university', 'faculty', 'course')
+                compact('request', 'university', 'faculty', 'course', 'lesson')
             );
 
         } else {

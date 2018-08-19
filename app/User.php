@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Faculty;
 use App\Course;
+use App\Lesson;
 
 class User extends Authenticatable
 {
@@ -121,11 +122,12 @@ class User extends Authenticatable
                 'body' => $request->body,
                 'rating' => $avg_rating,
             ]);
-            // レビュー紐づく関係性と学部名、学科名も含めて保存
+            // レビュー紐づく関係性と学部名、学科名、授業名も含めて保存
             $faculty = Faculty::find($request->faculty);
             $course = Course::find($request->course);
-            $review->universities()->attach($universityId, ['faculty' => $faculty->name, 'course' => $course->name]);
-
+            $lesson = Lesson::find($request->lesson);
+            $review->universities()->attach($universityId, ['faculty' => $faculty->name, 'course' => $course->name, 'lesson' => $lesson->name]);
+            // レビュー作成にと同時にレビューを管理するインスタンスを作成
             $review_management = $review->reviewManagement()->create([
                 'review_id' => $review->id,
             ]);

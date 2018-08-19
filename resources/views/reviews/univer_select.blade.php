@@ -18,7 +18,7 @@
 	</div>
 </div>
 <div class="container">
-{{-- エラーチェック テスト --}}
+
 	@forelse ($errors->all() as $error)
 		<div class="alert alert-danger text-center">{{ $error }}</div>
 	@empty
@@ -33,12 +33,14 @@
 		{!! Form::open(['route' => 'review.input', 'method' => 'get']) !!}
 		<div class="form-group row justify-content-lg-center">
 
-			<select name="select" class="dependent custom-select text-center col-lg mx-3 p-3 border border-primary" required>
+			<select name="select" class="dependent custom-select text-center col-lg mr-1 p-3 border border-primary" required>
 				<option value="">大学を選択</option>
 				@foreach ($univer->facultyContents as $f_content)
 					@foreach ($f_content->courseContents as $c_content)
 						@foreach ($c_content->course->lessons as $lesson)
-							<option value="{{ $univer->id . ',' . $f_content->faculty->id . ',' . $c_content->course->id}}">{{ $univer->name .' > '. $f_content->faculty->name .' > '. $c_content->course->name . ' > ' . $lesson->name }}</option>
+							<option value="{{ $univer->id . ',' . $f_content->faculty->id . ',' . $c_content->course->id . ',' . $lesson->id}}">
+								{{ $univer->name .' > '. $f_content->faculty->name .' > '. $c_content->course->name . ' > ' . $lesson->name }}
+							</option>
 						@endforeach
 					@endforeach
 				@endforeach
@@ -76,7 +78,7 @@
 	$(function(){
 		$('.dependent').dependentSelects({
 			placeholderOption: ['学部を選択', '学科を選択'],
-			class: 'custom-select col-lg mx-3 p-3 border border-primary',
+			class: 'custom-select col-lg mr-1 p-3 border border-primary',
 		});
 	})
 	</script>
