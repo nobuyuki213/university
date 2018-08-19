@@ -12,12 +12,14 @@
         <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
                 <img class="card-img-top" src="" alt="カード画像のキャプション">
-                <div class="card-body">
-                    <a href="{{ route('school') }}"><P class="h3 text-center p-5">学業</p></a>
-                </div>
+                <a href="{{ route('school') }}">
+                    <div class="card-body">
+                        <P class="h3 text-center p-5">学業</p>
+                    </div>
+                </a>
             </div>
         </div>
-        <div class=" col-md-4">
+        <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
                 <img class="card-img-top" src="" alt="カード画像のキャプション">
                 <div class="card-body">
@@ -25,7 +27,7 @@
                 </div>
             </div>
         </div>
-        <div class=" col-md-4">
+        <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
                 <img class="card-img-top" src="" alt="カード画像のキャプション">
                 <div class="card-body">

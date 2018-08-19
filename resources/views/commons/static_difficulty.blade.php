@@ -23,5 +23,5 @@
         <div class="small">とても難しい</div>
         @break
     @default
-        <div class="">難易度未設定</div>
+        <div class="small">難易度未設定</div>
 @endswitch

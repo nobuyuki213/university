@@ -51,14 +51,17 @@ class Lesson extends Model
      * [scopesearch 授業絞り込み処理]
      * @param  [type] $query   [description]
      * @param  [type] $request [description]
+     * @param  [type] $id      [university]
      * @return [type]          [description]
      */
-    public function scopesearch($query, $request)
+    public function scopesearch($query, $request, $id)
     {
         $lessons_query = self::query();
         $hasParam = true;
 
         if ($request->all()) {
+            $lessons = $lessons_query->where('university_id', $id);
+
             if ($request->has('course_ids')) {
                 $lessons = $lessons_query->whereIn('course_id', $request->course_ids);
             }

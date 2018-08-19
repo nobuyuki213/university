@@ -72,7 +72,7 @@ class UniversitiesController extends Controller
     public function show(Request $request, $id)
     {
         // 授業の絞り込み処理を実行
-        $search_lessons = Lesson::search($request);
+        $search_lessons = Lesson::search($request, $id);
         $message = $search_lessons['message'];
         $search_lessons = $search_lessons['lessons'];
 

@@ -28,46 +28,43 @@
 		<div class="alert alert-danger text-center">{{ session('error') }}</div>
 	@endif
 
-	@forelse ($universities as $univer)
+	@if ($universities)
 
 		{!! Form::open(['route' => 'review.input', 'method' => 'get']) !!}
-		<div class="form-group row justify-content-lg-center">
+			<div class="form-group row justify-content-lg-center">
 
-			<select name="select" class="dependent custom-select text-center col-lg mr-1 p-3 border border-primary" required>
-				<option value="">大学を選択</option>
-				@foreach ($univer->facultyContents as $f_content)
-					@foreach ($f_content->courseContents as $c_content)
-						@foreach ($c_content->course->lessons as $lesson)
-							<option value="{{ $univer->id . ',' . $f_content->faculty->id . ',' . $c_content->course->id . ',' . $lesson->id}}">
-								{{ $univer->name .' > '. $f_content->faculty->name .' > '. $c_content->course->name . ' > ' . $lesson->name }}
-							</option>
+				<select name="select" class="dependent custom-select text-center col-lg mr-1 p-3 border border-primary" required>
+					<option value="">大学を選択</option>
+					@foreach ($universities as $univer)
+						@foreach ($univer->facultyContents as $f_content)
+							@foreach ($f_content->courseContents as $c_content)
+								@foreach ($c_content->course->lessons as $lesson)
+									<option value="{{ $univer->id . ',' . $f_content->faculty->id . ',' . $c_content->course->id . ',' . $lesson->id}}">
+										{{ $univer->name .' > '. $f_content->faculty->name .' > '. $c_content->course->name . ' > ' . $lesson->name }}
+									</option>
+								@endforeach
+							@endforeach
 						@endforeach
 					@endforeach
-				@endforeach
-			</select>
+				</select>
 
-		</div>
-
-{{-- 		<div class="form-group">
-			<div class="custom-control custom-checkbox">
-				{!! Form::checkbox('provider', 0, false, ['class' => 'custom-control-input', 'id' => 'provider']) !!}
-				{!! Html::decode(Form::label('provider', '<a href="#">利用規約</a>を同意の上、レビューする', ['class' => 'custom-control-label'])) !!}
 			</div>
-		</div> --}}
-		<div class="submit-form text-center mt-5">
-			{!! Form::button('レビューを書く', ['class' => 'btn btn-outline-primary', 'type' => 'submit', 'id' => 'submitbtn']) !!}
-		</div>
 
+	{{-- 		<div class="form-group">
+				<div class="custom-control custom-checkbox">
+					{!! Form::checkbox('provider', 0, false, ['class' => 'custom-control-input', 'id' => 'provider']) !!}
+					{!! Html::decode(Form::label('provider', '<a href="#">利用規約</a>を同意の上、レビューする', ['class' => 'custom-control-label'])) !!}
+				</div>
+			</div> --}}
+			<div class="submit-form text-center mt-5">
+				{!! Form::button('レビューを書く', ['class' => 'btn btn-outline-primary', 'type' => 'submit', 'id' => 'submitbtn']) !!}
+			</div>
 		{!! Form::close() !!}
-
-	@empty
+	@else
 		登録された大学がありません。
-	@endforelse
-
+	@endif
 
 </div>
-
-
 
 @endsection
 

@@ -5,14 +5,15 @@
 @endsection
 
 @section('content')
-<pre>
+{{-- テスト用 --}}
+{{-- <pre>
 	{!! var_dump($tag_ids) !!}
 	@if ($tag_ids)
 		@foreach ($tag_ids as $t_id)
 		{{ var_dump($t_id) }}
 		@endforeach
 	@endif
-</pre>
+</pre> --}}
 
 <div class="university-header container">
 	<div class="my-5">
@@ -109,11 +110,11 @@
 					</div>
 				</div>
 			@else
-				<div class="card border-info mt-3">
+				<div class="card border-0 mt-3">
 					<div class="card-header bg-info text-white border-bottom border-info">
 						<div class="text-center">{{ $university->name }}の条件にマッチした授業リスト</div>
 					</div>
-					<div class="card-body">
+					<div class="card-body border border-info">
 						@foreach ($search_lessons as $s_lesson)
 							{!! link_to_route('lesson.show', $s_lesson->name, ['id' => $s_lesson->id], ['class' => 'p-2 m-1 border border-primary']) !!}
 						@endforeach
@@ -123,12 +124,12 @@
 		</div>
 	@endif
 
-	<div class="university-lessons mt-3">
-		<div class="card border-dark">
+	<div class="university-lessons my-3">
+		<div class="card border-dark border-0">
 			<div class="card-header bg-dark text-white border-bottom border-dark">
 				<div class="text-center">{{ $university->name }}のすべての授業リスト</div>
 			</div>
-			<div class="card-body">
+			<div class="card-body border border-dark">
 
 			@if (count($lessons) > 0)
 				@foreach ($lessons as $lesson)

@@ -6,6 +6,9 @@
 
 @section('content')
 <div class="container">
+	<div class="mt-3 d-inline-block">
+		<a href="javascript:history.back()" class="btn btn-outline-secondary btn-sm"><i class="fas fa-undo fa-lg"></i> 戻る</a>
+	</div>
 	<div class="lesson-header row mt-3">
 		<div class="col">
 			<div class="card">
@@ -114,7 +117,6 @@
 		</div>
 	</div>{{-- lesson-basic-details end --}}
 	<div class="lesson-test-details mt-3">
-
 		<div class="lesson-test-headline mb-3">
 			<div class="card">
 				<div class="card-header bg-danger">
@@ -124,16 +126,16 @@
 		</div>
 		<div class="row">
 			<div class="col-md-4 mb-3">
-				<div class="intermediate-test">
-					<div class="card text-center border-danger">
+				<div class="intermediate-test h-100">
+					<div class="card text-center border-danger h-100">
 						<div class="card-header">
 							<p class="mb-0">中間テスト</p>
 						</div>
 						<div class="card-body">
 							@if ($lesson->is_intermediate_test == 1)
-								<h5 class="">ある</h5>
+								<h5 class="my-2">ある</h5>
 							@else
-								<h5 class="">ない</h5>
+								<h5 class="my-2">ない</h5>
 							@endif
 						</div>
 					</div>
@@ -141,8 +143,8 @@
 			</div>
 
 			<div class="col-md-4 mb-3">
-				<div class="intermediate-level">
-					<div class="card text-center border-danger">
+				<div class="intermediate-level h-100">
+					<div class="card text-center border-danger h-100">
 						<div class="card-header">
 							<p class="mb-0">中間テストの難易度</p>
 						</div>
@@ -156,16 +158,16 @@
 			</div>
 
 			<div class="col-md-4 mb-3">
-				<div class="intermediate-report">
-					<div class="card text-center border-danger">
+				<div class="intermediate-report h-100">
+					<div class="card text-center border-danger h-100">
 						<div class="card-header">
 							<p class="mb-0">中間のレポート</p>
 						</div>
 						<div class="card-body">
 							@if ($lesson->is_intermediate_report == 1)
-								<h5 class="">ある</h5>
+								<h5 class="my-2">ある</h5>
 							@else
-								<h5 class="">ない</h5>
+								<h5 class="my-2">ない</h5>
 							@endif
 						</div>
 					</div>
@@ -173,16 +175,16 @@
 			</div>
 
 			<div class="col-md-4 mb-3">
-				<div class="final-test">
-					<div class="card text-center border-danger">
+				<div class="final-test h-100">
+					<div class="card text-center border-danger h-100">
 						<div class="card-header">
 							<p class="mb-0">期末テスト</p>
 						</div>
 						<div class="card-body">
 							@if ($lesson->is_final_test == 1)
-								<h5 class="">ある</h5>
+								<h5 class="my-2">ある</h5>
 							@else
-								<h5 class="">ない</h5>
+								<h5 class="my-2">ない</h5>
 							@endif
 						</div>
 					</div>
@@ -190,8 +192,8 @@
 			</div>
 
 			<div class="col-md-4 mb-3">
-				<div class="final-level">
-					<div class="card text-center border-danger">
+				<div class="final-level h-100">
+					<div class="card text-center border-danger h-100">
 						<div class="card-header">
 							<p class="mb-0">期末テストの難易度</p>
 						</div>
@@ -205,16 +207,16 @@
 			</div>
 
 			<div class="col-md-4 mb-3">
-				<div class="final-report">
-					<div class="card text-center border-danger">
+				<div class="final-report h-100">
+					<div class="card text-center border-danger h-100">
 						<div class="card-header">
 							<p class="mb-0">期末のレポート</p>
 						</div>
 						<div class="card-body">
 							@if ($lesson->is_final_report == 1)
-								<h5 class="">ある</h5>
+								<h5 class="my-2">ある</h5>
 							@else
-								<h5 class="">ない</h5>
+								<h5 class="my-2">ない</h5>
 							@endif
 						</div>
 					</div>
