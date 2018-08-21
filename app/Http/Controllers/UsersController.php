@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Review;
 
 class UsersController extends Controller
 {
@@ -47,7 +48,7 @@ class UsersController extends Controller
     public function show($id)
     {
         //
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         $sent_msgs = $user->sendings()->get();
         $receive_msgs = $user->receivings()->get();
 
@@ -60,6 +61,20 @@ class UsersController extends Controller
         ];
 
         return view('users.show', $data);
+    }
+
+    /**
+     * [userReviews ユーザーのレビュー一覧ページ]
+     * @return [type] [description]
+     */
+    public function userReviews($id)
+    {
+        $user = User::findOrFail($id);
+        $reviews = $user->reviews()->with('user','universities')->get();
+// dd($reviews);
+        return view('users.user_reviews',
+            compact('user', 'reviews')
+        );
     }
 
     /**

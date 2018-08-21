@@ -27,9 +27,17 @@
 
 			@if (Auth::check() && Auth::user()->id == $user->id)
 			<ul class="nav nav-pills justify-content-center mt-4">
-				<li class="nav-item"><a href="{{ route('user.show', ['id' => Auth::user()->id]) }}" class="nav-link{{ Request::is('user/*') ? ' active' : '' }}"><i class="far fa-envelope"></i></a></li>
-				<li class="nav-item"><a href="#" class="nav-link">コメント</a></li>
-				<li class="nav-item"><a href="#" class="nav-link">お気に入り</a></li>
+				<li class="nav-item">
+					<a href="{{ route('user.show', ['id' => Auth::user()->id]) }}" class="nav-link{{ Request::is('user/' . $user->id) ? ' active' : '' }}">
+						<i class="far fa-envelope"></i>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="{{ route('user.reviews', ['id' => Auth::user()->id]) }}" class="nav-link{{ Request::is('user/*/reviews') ? ' active' : '' }}">
+						<i class="far fa-comment"></i>
+					</a>
+				</li>
+				<li class="nav-item"><a href="#" class="nav-link">項目</a></li>
 			</ul>
 			@endif
 

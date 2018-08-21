@@ -35,6 +35,7 @@ class Review extends Model
      */
     public function universities()
     {
-    	return $this->belongsToMany(University::class, 'university_review')->withPivot('faculty', 'course')->withTimestamps();
+    	return $this->belongsToMany(University::class, 'university_review')
+                    ->withPivot('faculty', 'course', 'lesson')->withTimestamps();
     }
 }

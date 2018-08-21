@@ -34,6 +34,8 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::group(['prefix' => 'user/{user_id}'], function(){
 		Route::post('sending', 'UserMessageController@store')->name('user.sending');
 		Route::get('messages', 'UserMessageController@show')->name('user.messages');
+		// ユーザーレビュー一覧ページ画面
+		Route::get('reviews', 'UsersController@userReviews')->name('user.reviews');
 	});
 	// レビュー機能関連
 	Route::group(['prefix' => 'review'], function(){
