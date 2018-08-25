@@ -47,20 +47,23 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //
-        $user = User::findOrFail($id);
-        $sent_msgs = $user->sendings()->get();
-        $receive_msgs = $user->receivings()->get();
+        if (\Auth::check() && \Auth::user()->id == $id) {
+            $user = User::findOrFail($id);
+            $sent_msgs = $user->sendings()->get();
+            $receive_msgs = $user->receivings()->get();
+// dd($sent_msgs);
 
-        // dd($sent_msgs);
+            $data = [
+                'user' => $user,
+                'sent_msgs' => $sent_msgs,
+                'receive_msgs' => $receive_msgs,
+            ];
 
-        $data = [
-            'user' => $user,
-            'sent_msgs' => $sent_msgs,
-            'receive_msgs' => $receive_msgs,
-        ];
+            return view('users.show', $data);
+        } else {
 
-        return view('users.show', $data);
+            return redirect()->back();
+        }
     }
 
     /**
@@ -69,12 +72,17 @@ class UsersController extends Controller
      */
     public function userReviews($id)
     {
-        $user = User::findOrFail($id);
-        $reviews = $user->reviews()->with('user','universities')->get();
+        if (\Auth::check() && \Auth::user()->id == $id) {
+            $user = User::findOrFail($id);
+            $reviews = $user->reviews()->with('user','universities')->get();
 // dd($reviews);
-        return view('users.user_reviews',
-            compact('user', 'reviews')
-        );
+            return view('users.user_reviews',
+                compact('user', 'reviews')
+            );
+        } else {
+
+            return redirect()->back();
+        }
     }
 
     /**

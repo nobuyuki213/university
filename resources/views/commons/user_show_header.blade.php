@@ -1,34 +1,35 @@
 <div class="jumbotron jumbotron-fluid">
 	<div class="container-fluid" id="user-page">
-		<div class="user-header mx-auto">
-			<div class="media" style="position:relative;">
-				<!-- user avatar image -->
-				@if ($user->avatar != 'default.jpg')
-				<a href="#" class="ml-md-4 ml-sm-3 mr-2 w-25">
-					<img src="{{ asset('storage/avatars/'. $user->id . '/' . $user->avatar) }}" class="img-fluid rounded-circle" alt="user-icon">
-				</a>
-				@else
-				<a href="#" class="ml-md-4 ml-sm-3 mr-2 w-25">
-					<img src="{{ asset('storage/avatars/' . $user->avatar) }}" class="img-fluid rounded-circle" alt="user-icon">
-				</a>
-				@endif
-				<!-- user avatar change ボタン ログインユーザー本人のみ表示-->
-				@if (Auth::check() && Auth::user()->id == $user->id)
-				<span class="text-secondary bg-light rounded-circle" data-toggle="modal" data-target="#UserIconModal" style="position:absolute;bottom:0.3rem;left:19.5vmin;">
-					<i class="fas fa-plus-circle" style="font-size:calc(0.6rem + 2.5vmin)"></i>
-				</span>
-				@endif
+		<div class="user-header">
+			<div class="row">
+				<div class="media col-lg-8 offset-lg-2" style="position:relative;">
+					<!-- user avatar image -->
+					@if ($user->avatar != 'default.jpg')
+					<a href="#" class="mr-3" style="max-width:15%;">
+						<img src="{{ asset('storage/avatars/'. $user->id . '/' . $user->avatar) }}" class="img-fluid rounded-circle" alt="user-icon" style="height:100px;width:100px;">
+					</a>
+					@else
+					<a href="#" class="mr-3" style="max-width:15%;">
+						<img src="{{ asset('storage/avatars/' . $user->avatar) }}" class="img-fluid rounded-circle" alt="user-icon">
+					</a>
+					@endif
+					@if (Auth::check() && Auth::user()->id == $user->id)
+					<!-- user avatar change ボタン ログインユーザー本人のみ表示-->
+					<span class="text-secondary" data-toggle="modal" data-target="#UserIconModal" style="position:absolute;bottom:-1vmin;left:3%;">
+						<i class="fas fa-plus-circle bg-light rounded-circle" style="font-size:calc(0.6rem + 2vmin)"></i>
+					</span>
+					@endif
 
-				<div class="media-body">
-					<h5 class="mt-0">{{ $user->name }}</h5>
-					メディアのコンテンツ...
-				</div><!-- /.media-body -->
-			</div><!-- /.media -->
+					<div class="media-body">
+						<h5 class="mt-0">{{ $user->name }}</h5>
+					</div><!-- /.media-body -->
+				</div><!-- /.media -->
+			</div>
 
 			@if (Auth::check() && Auth::user()->id == $user->id)
 			<ul class="nav nav-pills justify-content-center mt-4">
 				<li class="nav-item">
-					<a href="{{ route('user.show', ['id' => Auth::user()->id]) }}" class="nav-link{{ Request::is('user/' . $user->id) ? ' active' : '' }}">
+					<a href="{{ route('user.show', ['id' => Auth::user()->id]) }}" class="nav-link{{ Request::is('user/' . $user->id) || Request::is('user/*/messages') ? ' active' : '' }}">
 						<i class="far fa-envelope"></i>
 					</a>
 				</li>
@@ -37,7 +38,6 @@
 						<i class="far fa-comment"></i>
 					</a>
 				</li>
-				<li class="nav-item"><a href="#" class="nav-link">項目</a></li>
 			</ul>
 			@endif
 
@@ -45,8 +45,8 @@
 	</div>
 </div>
 
-<!-- user avatar change モーダル ログインユーザー本人の未表示-->
 @if (Auth::check() && Auth::user()->id == $user->id)
+<!-- user avatar change モーダル ログインユーザー本人の未表示-->
 <div class="modal fade" id="UserIconModal" tabindex="-1" role="dialog" aria-labelledby="UserIconModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">

@@ -11,7 +11,7 @@
 	</div> --}}
 	<div class="lesson-header row mt-3">
 		<div class="col">
-			<div class="card">
+			<div class="card shadow-sm">
 				<div class="card-body clearfix">
 
 					{{-- お気に入り記述スペース --}}
@@ -30,7 +30,7 @@
 						</div>
 					@endif
 					{{-- 以下の先輩のコメントは、のちにifで表示・非表示の分岐にする --}}
-					<div class="nav-scroll senior-comment mt-1 float-right">
+					<div class="nav-scroll senior-comment mt-2 float-right">
 						<a href="#senior" class="btn btn-warning btn-sm hvr-icon-hang">
 							先輩のコメント <i class="fa fa-chevron-down hvr-icon"></i>
 						</a>
@@ -108,8 +108,7 @@
 				</div>
 			</div>
 
-			<div class="col-md-4 mb-3">
-				{{-- 空白 --}}
+			<div class="offset-md-4">
 			</div>
 
 			<div class="col-md-12 mb-3">
@@ -308,7 +307,7 @@
 			</div>
 		</div>
 	</div>{{-- Lesson-remarks end --}}
-	<div class="senior-comment mt-3" id="senior">
+	<div class="senior-comment my-3" id="senior">
 		<div class="senior-comment-headline mb-3">
 			<div class="card">
 				<div class="card-header bg-warning">
@@ -318,7 +317,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12 mb-3">
-				<div class="remarks">
+				<div class="comment">
 					<div class="card border-warning">
 						<div class="card-body">
 							<p class="text-primary mb-0">{{ $lesson->remarks}}</p>
@@ -335,20 +334,20 @@
 <!-- スムーズスクロール部分の記述 -->
 <script>
 $(function(){
-   // #で始まるアンカーをクリックした場合に処理
-   $('a[href^=#senior]').click(function() {
-      // スクロールの速度
-      var speed = 1000; // ミリ秒
-      // アンカーの値取得
-      var href= $(this).attr("href");
-      // 移動先を取得
-      var target = $(href == "#" || href == "" ? 'html' : href);
-      // 移動先を数値で取得
-      var position = target.offset().top;
-      // スムーススクロール
-      $('body,html').animate({scrollTop:position}, speed, 'swing');
-      return false;
-   });
-});
+	// #で始まるアンカーをクリックした場合に処理
+	$('a[href^=#senior]').click(function() {
+		// スクロールの速度
+		var speed = 600; // ミリ秒
+		// アンカーの値取得
+		var href= $(this).attr("href");
+		// 移動先を取得
+		var target = $(href == "#" || href == "" ? 'html' : href);
+		// 移動先を数値で取得
+		var position = target.offset().top;
+		// スムーススクロール
+		$('body,html').animate({scrollTop:position}, speed, 'swing');
+		return false;
+		});
+	});
 </script>
 @endsection

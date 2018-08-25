@@ -9,10 +9,9 @@
 
 	@include('commons.user_show_header')
 
-{{-- ログインユーザーだげに表示されるコンテンツ --}}
 @if (Auth::check() && Auth::user()->id == $user->id)
+{{-- login user only display --}}
 <div class="container-fluid" id="user-page">
-	{{ 'ログインしたユーザ本人だけ表示されるコンテンツ' }}
 	<div class="user-messages">
 
 		<!-- タブ部分 -->
@@ -99,8 +98,8 @@
 </div>
 @endif
 
-{{-- ログインユーザーでない場合に表示されるコンテンツ --}}
 @if (Auth::check() && Auth::user()->id != $user->id)
+{{-- not login user display --}}
 <div class="container-fluid" id="user-page">
 
 	@if (Session::has('send'))
@@ -110,7 +109,7 @@
 	@endif
 
 	<div class="message-from">
-		<div class="p-3">
+		<div class="">
 			<div class="card border-dark">
 			{{ Form::open(['route' => ['user.sending', $user->id], 'method' => 'post']) }}
 				<div class="card-header bg-transparent border-0">

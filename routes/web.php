@@ -47,14 +47,15 @@ Route::group(['middleware' => ['auth']], function() {
 		// レビュー登録完了画面
 		Route::get('complete', 'ReviewsController@complete')->name('review.complete');
 	});
+	// 大学選択ページ画面
+	Route::get('school', 'UniversitiesSearchController@school')->name('school');
 	// 大学の授業サーチ画面
 	Route::resource('university', 'UniversitiesController', ['only' => ['show']]);
 	// 授業ページ画面
 	Route::resource('lesson', 'LessonsController', ['only' => ['show']]);
 });
 
-// 大学選択ページ画面
-Route::get('school', 'UniversitiesSearchController@school')->name('school');
+
 
 
 

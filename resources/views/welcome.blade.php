@@ -9,26 +9,38 @@
 </div>
 <div class="container">
     <div class="main-contents row">
-        <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-                <img class="card-img-top" src="" alt="カード画像のキャプション">
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
                 <a href="{{ route('school') }}">
-                    <div class="card-body">
-                        <P class="h3 text-center p-5">学業</p>
-                    </div>
+                    <figure class="mb-0">
+                        <img src="{{ asset('storage/student.jpg') }}" class="card-img img-fluid" style="height:250px;object-fit:cover;" />
+                        <figcaption class="text-center">
+                            <div class="card-body">
+                                <h3 class="text-white">学業</h3>
+                                <p class="text-white">School work</p>
+                            </div>
+                        </figcaption>
+                    </figure>
                 </a>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-                <img class="card-img-top" src="" alt="カード画像のキャプション">
-                <div class="card-body">
-                    <a href=""><h3 class="text-center p-5">働く</h3></a>
-                </div>
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <a href="#">
+                    <figure class="mb-0">
+                        <img src="{{ asset('storage/work.jpg') }}" class="card-img img-fluid" style="height:250px;object-fit:cover;" />
+                        <figcaption class="text-center">
+                            <div class="card-body">
+                                <h3 class="text-white">Coming soon</h3>
+                                {{-- <p class="text-white">Work</p> --}}
+                            </div>
+                        </figcaption>
+                    </figure>
+                </a>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
                 <img class="card-img-top" src="" alt="カード画像のキャプション">
                 <div class="card-body">
                     <h3 class="text-center p-5">遊ぶ</h3>

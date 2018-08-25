@@ -23,14 +23,14 @@
 <div class="container">
 	<div class="search mt-3">
 		{!! Form::open(['route' => ['university.show', $university->id], 'method' => 'get']) !!}
-			<div class="card mb-3">
+			<div class="card border-0 mb-3">
 				<div class="card-header bg-dark">
 					<div class="text-center">
-						<span class="text-white">学科を選択</span>
+						<h5 class="text-white mb-0">学科を選択</h5>
 					</div>
 				</div>
 				<div class="card-body border border-dark">
-					<div class="form-group row">
+					<div class="form-group mb-0 row">
 
 					@if (count($university->courseContents) > 0)
 						@foreach ($university->courseContents as $c_content)
@@ -45,17 +45,17 @@
 					</div>
 				</div>
 			</div>
-			<div class="card mb-3">
+			<div class="card border-0 mb-3">
 				<div class="card-header bg-info">
 					<div class="text-center">
-						<span class="text-white">学年を選択</span>
+						<h5 class="text-white mb-0">学年を選択</h5>
 					</div>
 				</div>
 				<div class="card-body border border-info">
-					<div class="form-group row">
+					<div class="form-group mb-0 row">
 
 						@for ($i = 1; $i <= 4 ; $i++)
-							<div class="btn-group-toggle mb-3 col-md-3 col-6 text-center" data-toggle="buttons">
+							<div class="btn-group-toggle text-center col-md-3 mb-md-0 col-6 @if($i <= 2)mb-3 @endif" data-toggle="buttons">
 								<label class="btn btn-outline-info @if($school_years)@foreach($school_years as $s_year)@if($s_year == $i){{'active'}}@break @endif @endforeach @endif">
 									<input type="checkbox" name="school_years[]" value="{{$i}}" autocomplete="off" @if ($school_years) @foreach ($school_years as $s_year) @if ($s_year == $i) {{ 'checked' }} @break @endif @endforeach @endif> {{$i}}学年
 								</label>
@@ -65,14 +65,14 @@
 					</div>
 				</div>
 			</div>
-			<div class="card mb-3">
+			<div class="card border-0 mb-3">
 				<div class="card-header bg-success">
 					<div class="text-center">
-						<span class="text-white">タグを選択</span>
+						<h5 class="text-white mb-0">タグを選択</h5>
 					</div>
 				</div>
 				<div class="card-body border border-success">
-					<div class="form-group">
+					<div class="form-group mb-0">
 
 						@if (count($tags) > 0)
 							@foreach ($tags as $tag)
@@ -90,13 +90,13 @@
 				</div>
 			</div>
 			<div class="search-botton text-center my-3">
-				{!! Form::button('選択した条件で絞り込む <i class="fas fa-search fa-lg"></i>', ['class' => 'btn btn-primary', 'type' => 'submit']) !!}
+				{!! Form::button('選択した条件で絞り込む <i class="fas fa-search fa-lg"></i>', ['class' => 'btn btn-primary btn-lg hvr-outline-in', 'type' => 'submit']) !!}
 			</div>
 		{!! Form::close() !!}
 	</div>
 
 	@if (isset($course_ids) || isset($school_years) || isset($tag_ids))
-		<div class="universiry-search-lessons mt-3">
+		<div class="universiry-search-lessons mt-3" id="search">
 			@if (isset($message))
 				<div class="card">
 					<div class="card-header">
@@ -142,5 +142,16 @@
 @endsection
 
 @section('script')
-
+{{-- サーチ後のページ表示直後にスムーススクロール実行 --}}
+<script>
+$(function(){
+	var speed = 500; //スクロールのスピードを設定（ミリ秒）
+	var targetOffset = $('#search').offset().top; //ターゲットとなるdivを設定
+	//ページを読み込み0.8秒後にターゲットとなるdivまで自動スクロール
+	setTimeout(function(){
+		$("html,body").stop().animate({scrollTop:targetOffset},　speed, 'swing');
+		return false;
+	},500);
+})
+</script>
 @endsection

@@ -36,12 +36,10 @@
                                      document.getElementById('logout-form').submit();">
                             ログアウト
                         </a>
-
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             {{ csrf_field() }}
                         </form>
                         <a class="drawer-menu-item" href="#">メニュー2</a>
-                        <a class="drawer-menu-item" href="#">メニュー3</a>
                       </div><!-- /.dropdown-menu -->
                     </div><!-- /.dropdown -->
                 </li>
