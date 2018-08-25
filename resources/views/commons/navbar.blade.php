@@ -11,12 +11,12 @@
 
         </div>
         <nav class="drawer-nav" role="navigation">
-            <ul class="drawer-menu drawer-menu--left">
+            {{-- <ul class="drawer-menu drawer-menu--left"> --}}
                 {{-- <li><a class="drawer-menu-item" href="{{ route('university.create') }}">大学登録(仮組)</a></li> --}}
                 {{-- <li><a class="drawer-menu-item text-success" href="{{ route('faculty.create') }}">学部名M登録(仮組)</a></li> --}}
                 {{-- <li><a class="drawer-menu-item text-info" href="{{ route('courses.create') }}">学科名M登録(仮組)</a></li> --}}
-                <li><a class="drawer-menu-item" href="{{ route('university.select') }}">口コミ(仮組)</a></li>{{-- 仮作成 --}}
-            </ul>
+                {{-- <li><a class="drawer-menu-item" href="{{ route('university.select') }}">口コミ(仮組)</a></li> --}}
+            {{-- </ul> --}}
             <ul class="drawer-menu drawer-menu--right">
             @guest
                 <li><a class="drawer-menu-item" href="{{ route('login') }}">ログイン</a></li>
