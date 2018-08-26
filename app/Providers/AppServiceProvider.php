@@ -15,6 +15,11 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         \Schema::defaultStringLength(191);
+
+        // 本番のみページネーションで生成されるURLをHTTPSにする
+        if (config('app.env') === 'production') {
+            $this->app['request']->server->set('HTTPS','on');
+        }
     }
 
     /**

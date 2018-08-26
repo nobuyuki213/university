@@ -42,7 +42,8 @@ return [
     /*
      * Use `https`.
      */
-    'secure' => false,
+    // TrueであればHTTPSでアクセスされるようになるので、環境に応じて変更
+    'secure' => (env('APP_ENV', 'local') === 'production'),
 
     /*
      * Laravel-admin auth setting.
