@@ -23,6 +23,14 @@ figure {
 	width: 100%;
 	background: #46ceb4;
 }
+figure h5 {
+	position: absolute;
+	top:40%;
+	z-index: 2;
+	background-color: rgba(70,206,180,0.7);
+	-webkit-transition: .3s;
+	transition: .3s;
+}
 figure img {
 	position: relative;
 	z-index: 1;
@@ -40,6 +48,10 @@ figcaption {
 	-webkit-transition: .3s;
 	transition: .3s;
 }
+figure:hover h5 {
+	-webkit-transform: translateX(-200px);
+	transform: translateX(-200px);
+}
 figure:hover img {
 	-webkit-transform: translateY(-40px);
 	transform: translateY(-40px);
@@ -48,4 +60,12 @@ figure:hover figcaption {
 	bottom: 0;
 	-webkit-transform: translateY(-30px);
 	transform: translateY(-30px);
+}
+figure:hover img {
+	-webkit-transition-delay: .2s;
+	transition-delay: .2s;
+}
+figure:hover figcaption {
+	-webkit-transition-delay: .2s;
+	transition-delay: .2s;
 }

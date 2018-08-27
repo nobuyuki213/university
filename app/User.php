@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Notifications\PasswordResetNotification;
 use App\Faculty;
 use App\Course;
 use App\Lesson;
@@ -29,6 +30,16 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * [sendPasswordResetNotification パスワードリセット通知の送信をオーバーライド]
+     * @param  [string] $token [description]
+     * @return [void]        [description]
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new PasswordResetNotification($token));
+    }
 
     /**
      * [reviews ユーザーが投稿した複数のレビューを取得するリレーション定義]

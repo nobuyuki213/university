@@ -10,7 +10,7 @@
 	@include('commons.user_show_header')
 
 <div class="container-fluid" id="user-page">
-	{{ 'ログインしたユーザー本人だけ表示されるコンテンツ' }}
+	{{-- login user only display --}}
 	<div class="user-reviews">
 		<div class="reviews-main">
 			@if (count($reviews) > 0)

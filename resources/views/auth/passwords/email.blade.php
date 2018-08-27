@@ -3,28 +3,33 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Reset Password</div>
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">パスワードをお忘れですか？</div>
 
-                <div class="panel-body">
+                <div class="card-body">
                     @if (session('status'))
-                        <div class="alert alert-success">
+                        <div class="alert alert-success text-center">
                             {{ session('status') }}
+                        </div>
+                    @else
+                        <div class="infomaition p-2">
+                            <p>パスワードをリセットします</p>
+                            <p>登録しているメールアドレスを入力してください</p>
                         </div>
                     @endif
 
-                    <form class="form-horizontal" method="POST" action="{{ route('password.email') }}">
+                    <form method="POST" action="{{ route('password.email') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                        <div class="form-group row">
+                            <label for="email" class="col-lg-4 col-form-label">メールアドレス</label>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                            <div class="col-lg-8">
+                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
 
                                 @if ($errors->has('email'))
-                                    <span class="help-block">
+                                    <span class="invalid-feedback">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
@@ -32,10 +37,13 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
+                            <div class="text-center">
                                 <button type="submit" class="btn btn-primary">
-                                    Send Password Reset Link
+                                    パスワード再設定用メール送信
                                 </button>
+                            </div>
+                            <div class="text-center text-primary mt-2">
+                                上記メールアドレスに再設定用のURLを送信します
                             </div>
                         </div>
                     </form>

@@ -106,7 +106,7 @@
 			@else
 				<div class="card border-0 mt-3">
 					<div class="card-header bg-transparent border-top border-bottom border-dark py-3">
-						<h4 class="text-center mb-0">{{ $university->name }}の条件にマッチした授業リスト</h4>
+						<h5 class="text-center mb-0">条件にマッチした授業</h5>
 					</div>
 					<div class="card-body">
 						@foreach ($search_lessons as $s_lesson)
@@ -122,7 +122,7 @@
 <div class="university-fooder jumbotron jumbotron-fluid bg-dark mb-0" style="margin-top:10rem">
 	<div class="container">
 		<div class="university-lessons">
-			<h5 class="text-center text-white">{{ $university->name }}のすべての授業リスト</h5>
+			<h5 class="text-center text-white">{{ $university->name }}の全授業</h5>
 		</div>
 		<div class="lessons card bg-transparent">
 			<div class="card-body border border-secondary">
