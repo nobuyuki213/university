@@ -28,24 +28,24 @@ Route::get('/', 'WelcomeController@welcome');
 // ログイン認証設定
 Route::group(['middleware' => ['auth']], function() {
 	// ユーザーページ画面
-	Route::resource('user', 'UsersController', ['only' => ['show']]);
-	Route::post('avatar', 'UploadController@updateAvatar')->name('avatar.update');
+	// Route::resource('user', 'UsersController', ['only' => ['show']]); 停止
+	// Route::post('avatar', 'UploadController@updateAvatar')->name('avatar.update'); 停止
 	// ユーザーメッセージ機能関係
 	Route::group(['prefix' => 'user/{user_id}'], function(){
-		Route::post('sending', 'UserMessageController@store')->name('user.sending');
-		Route::get('messages', 'UserMessageController@show')->name('user.messages');
+		// Route::post('sending', 'UserMessageController@store')->name('user.sending'); 停止
+		// Route::get('messages', 'UserMessageController@show')->name('user.messages'); 停止
 		// ユーザーレビュー一覧ページ画面
-		Route::get('reviews', 'UsersController@userReviews')->name('user.reviews');
+		// Route::get('reviews', 'UsersController@userReviews')->name('user.reviews'); 停止
 	});
 	// レビュー機能関連
 	Route::group(['prefix' => 'review'], function(){
-		Route::get('select', 'UniversityReviewController@select')->name('university.select');
-		Route::get('input', 'UniversityReviewController@input')->name('review.input');
-		Route::post('comfirm', 'UniversityReviewController@comfirm')->name('review.comfirm');
+		// Route::get('select', 'UniversityReviewController@select')->name('university.select'); 停止
+		// Route::get('input', 'UniversityReviewController@input')->name('review.input'); 停止
+		// Route::post('comfirm', 'UniversityReviewController@comfirm')->name('review.comfirm'); 停止
 		// レビュー登録
-		Route::resource('review', 'ReviewsController', ['only' => ['store']]);
+		// Route::resource('review', 'ReviewsController', ['only' => ['store']]); 停止
 		// レビュー登録完了画面
-		Route::get('complete', 'ReviewsController@complete')->name('review.complete');
+		// Route::get('complete', 'ReviewsController@complete')->name('review.complete'); 停止
 	});
 	// 大学選択ページ画面
 	Route::get('school', 'UniversitiesSearchController@school')->name('school');

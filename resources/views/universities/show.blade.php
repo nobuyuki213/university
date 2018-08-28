@@ -23,7 +23,7 @@
 <div class="container">
 	<div class="search mt-3">
 		{!! Form::open(['route' => ['university.show', $university->id], 'method' => 'get']) !!}
-			<div class="card border-0 mb-3">
+			<div class="card border-0" style="margin-bottom:32px;">
 				<div class="card-header bg-dark">
 					<div class="text-center">
 						<h5 class="text-white mb-0">学科を選択</h5>
@@ -45,7 +45,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="card border-0 mb-3">
+			<div class="card border-0" style="margin-bottom:32px;">
 				<div class="card-header bg-info">
 					<div class="text-center">
 						<h5 class="text-white mb-0">学年を選択</h5>
@@ -65,7 +65,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="card border-0 mb-3">
+			<div class="card border-0" style="margin-bottom:32px;">
 				<div class="card-header bg-success">
 					<div class="text-center">
 						<h5 class="text-white mb-0">タグを選択</h5>
@@ -96,21 +96,21 @@
 	</div>
 
 	@if (isset($course_ids) || isset($school_years) || isset($tag_ids))
-		<div class="universiry-search-lessons mt-3" id="search">
+		<div class="universiry-search-lessons" id="search">
 			@if (isset($message))
-				<div class="card">
+				<div class="card" style="margin-top:32px;">
 					<div class="card-header">
 						<div class="alert alert-danger text-center mb-0">{{ $message }}</div>
 					</div>
 				</div>
 			@else
-				<div class="card border-0 mt-3">
+				<div class="card border-0" style="margin-top:32px;">
 					<div class="card-header bg-transparent border-top border-bottom border-dark py-3">
 						<h5 class="text-center mb-0">条件にマッチした授業</h5>
 					</div>
-					<div class="card-body">
+					<div class="card-body text-center px-lg-3 px-0">
 						@foreach ($search_lessons as $s_lesson)
-							{!! link_to_route('lesson.show', $s_lesson->name, ['id' => $s_lesson->id], ['class' => 'hvr-grow d-inline-block p-2 mr-1 mb-2 border border-primary', 'style' => 'text-decoration:none;']) !!}
+							{!! link_to_route('lesson.show', $s_lesson->name, ['id' => $s_lesson->id], ['class' => 'hvr-grow d-inline-block p-3 mr-1 mb-2 border border-primary', 'style' => 'text-decoration:none;']) !!}
 						@endforeach
 					</div>
 				</div>
@@ -119,7 +119,7 @@
 	@endif
 
 </div>
-<div class="university-fooder jumbotron jumbotron-fluid bg-dark mb-0" style="margin-top:10rem">
+<div class="university-fooder jumbotron jumbotron-fluid bg-dark mb-0" style="margin-top:160px">
 	<div class="container">
 		<div class="university-lessons">
 			<h5 class="text-center text-white">{{ $university->name }}の全授業</h5>

@@ -30,7 +30,7 @@
                       </a>
                       <!-- ドロップメニューの設定 -->
                       <div class="dropdown-menu w-100 border-0" aria-labelledby="dropdownMenuLink">
-                        <a class="drawer-menu-item" href="{{ route('user.show', ['id' => Auth::user()->id]) }}">マイページ</a>
+                        {{-- <a class="drawer-menu-item" href="{{ route('user.show', ['id' => Auth::user()->id]) }}">マイページ</a>休止 --}}
                         <a class="drawer-menu-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit();">
