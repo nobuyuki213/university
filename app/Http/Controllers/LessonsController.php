@@ -47,7 +47,7 @@ class LessonsController extends Controller
     public function show($id)
     {
         //
-        $lesson = Lesson::with('university', 'faculty', 'course', 'tags')->find($id);
+        $lesson = Lesson::with('university', 'faculty', 'course', 'tags', 'seniors')->find($id);
 
         return view('lessons.show', compact('lesson'));
     }

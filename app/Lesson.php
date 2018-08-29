@@ -48,6 +48,15 @@ class Lesson extends Model
     }
 
     /**
+     * [seniors 授業に所属する複数の先輩を取得するリレーション定義]
+     * @return [type] [description]
+     */
+    public function seniors()
+    {
+        return $this->hasMany(Senior::class, 'lesson_id');
+    }
+
+    /**
      * [scopesearch 授業絞り込み処理]
      * @param  [type] $query   [description]
      * @param  [type] $request [description]

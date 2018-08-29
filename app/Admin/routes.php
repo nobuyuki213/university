@@ -21,5 +21,6 @@ Route::group([
     $router->resource('auth/reviewmanagement', ReviewManagementController::class);
     $router->resource('auth/lessons', LessonController::class);
     $router->resource('auth/tags', TagController::class);
+    $router->resource('auth/seniors', SeniorController::class);
 
 });

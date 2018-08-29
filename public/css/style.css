@@ -1,11 +1,16 @@
-
-/*universtity index*/
+@charset "UTF-8";
+/*----------------
+大学一覧ページ シャドウ
+----------------*/
 .university-item:hover {
 	-webkit-box-shadow: -2px 10px 15px -5px rgba(0,0,0,0.75);
 	-moz-box-shadow: -2px 10px 15px -5px rgba(0,0,0,0.75);
 	box-shadow: -2px 10px 15px -5px rgba(0,0,0,0.75);
 }
-/*user show*/
+
+/*---------------
+ユーザーページ 幅サイズ
+---------------*/
 @media (min-width: 65em){
 	#user-page {
 	    max-width: 62rem;
@@ -16,7 +21,9 @@ html {
   -webkit-overflow-scrolling: touch;
 }
 
-/*top page image animation*/
+/*-------------------------------
+トップページ 3コンテンツイメージのアニメーション
+-------------------------------*/
 figure {
 	position: relative;
 	overflow: hidden;
@@ -68,4 +75,48 @@ figure:hover img {
 figure:hover figcaption {
 	-webkit-transition-delay: .2s;
 	transition-delay: .2s;
+}
+
+/*-----------------------
+授業ページ 先輩コメントのスタイル
+-----------------------*/
+.balloon-left {
+ 	position: relative;
+	display: inline-block;
+ 	margin: 0 0 1.2em 10px;
+	padding: 12px 10px;
+	min-width: 120px;
+ 	max-width: 100%;
+ 	color: #555;
+	/*font-size: 16px;*/
+	background: #FFF;
+ 	border: solid 1px #555;
+ 	box-sizing: border-box;
+}
+
+.balloon-left:before{
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: -16px;
+ 	margin-top: -8px;
+	border: 8px solid transparent;
+	border-right: 8px solid #FFF;
+ 	z-index: 2;
+}
+
+.balloon-left:after{
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: -17px;
+ 	margin-top: -8px;
+	border: 8px solid transparent;
+	border-right: 8px solid #555;
+ 	z-index: 1;
+}
+
+.balloon-left p {
+	margin: 0;
+	padding: 0;
 }

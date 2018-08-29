@@ -98,17 +98,33 @@ class LessonController extends Controller
                     $tags->resource('/admin/auth/tags');
                     // 表示項目の追加
                     $tags->id('タグID');
-                    $tags->name('タグ名');
+                    $tags->name('タグ名')->label('success');
                     // 操作パネルの非表示設定
                     $tags->disableCreateButton();
                     $tags->actions(function ($actions) {
                         $actions->disableDelete();
                         $actions->disableEdit();
                     });
+                    $tags->disableRowSelector();
                     // フィルター機能の追加
                     $tags->filter(function ($filter) {
                         $filter->like('name', 'タグ名');
                     });
+                });
+
+                $show->seniors('【' . $lesson->name . '】に属するの先輩(コメント)一覧', function ($seniors) {
+                    $seniors->resource('/admin/auth/seniors');
+                    // 表示項目の追加
+                    $seniors->id('先輩(コメント)ID');
+                    $seniors->comment('コメント')->limit(50);
+                    // 操作パネルの非表示設定
+                    $seniors->disableCreateButton();
+                    $seniors->actions(function ($actions) {
+                        $actions->disableDelete();
+                        $actions->disableEdit();
+                    });
+                    $seniors->disableRowSelector();
+
                 });
 
             }));
@@ -164,6 +180,9 @@ class LessonController extends Controller
             $grid->university()->name('大学名');
             $grid->faculty()->name('学部名');
             $grid->course()->name('学科名');
+            $grid->seniors('先輩コメント数')->display(function ($seniors) {
+                return count($seniors);
+            })->label('primary');
 
             $grid->created_at();
             $grid->updated_at();
@@ -179,70 +198,86 @@ class LessonController extends Controller
     {
         return Admin::form(Lesson::class, function (Form $form) {
 
-            $form->display('id', 'ID');
             // 表示項目の追加
-            $form->select('university_id', '大学(ID)')->options(University::pluck('name', 'id'))
-                ->rules('required|integer')
-                ->attribute('required');
-            $form->select('faculty_id', '学部名(ID)')->options(Faculty::pluck('name', 'id'))
-                ->rules('required|integer')
-                ->attribute('required');
-            $form->select('course_id', '学科名(ID)')->options(Course::pluck('name', 'id'))
-                ->rules('required|integer')
-                ->attribute('required');
-            $form->text('name', '授業名')
-                ->rules('required|string|max:50')
-                ->attribute(['class' => 'form-control input-lg'])
-                ->attribute('required');
-            $school_year = [1 => '1学年', 2 => '2学年', 3 => '3学年', 4 => '4学年',];
-            $form->select('school_year', '学年')->options($school_year);
-            $form->text('teacher_name', '先生名')
-                ->rules('required|string|max:20')
-                ->attribute(['class' => 'form-control input-lg'])
-                ->attribute('required')
-                ->help('（記入例）山田 太郎');
-            $form->text('textbook_name', '教科書名')
-                ->rules('required|string|max:191')
-                ->attribute(['class' => 'form-control input-lg'])
-                ->attribute('required');
-            $form->divide();
+            $form->tab('授業', function ($form) {
 
-            $states = [
-                'on'  => ['value' => 1, 'text' => 'ある', 'color' => 'success'],
-                'off' => ['value' => 0, 'text' => 'ない', 'color' => 'danger'],
-            ];
-            $level = [1 => 'とても簡単', 2 => '簡単', 3 => '普通', 4 => '難しい', 5 => 'とても難しい',];
+                $form->display('id', 'ID');
 
-            $form->switch('is_intermediate_test', '中間テストがあるか？')->states($states);
-            $form->radio('intermediate_level', '中間テストの難易度')->options($level);
-            $form->switch('is_intermediate_report', '中間レポートがあるか？')->states($states);
-            $form->divide();
+                $form->select('university_id', '大学(ID)')->options(University::pluck('name', 'id'))
+                    ->rules('required|integer')
+                    ->attribute('required');
+                $form->select('faculty_id', '学部名(ID)')->options(Faculty::pluck('name', 'id'))
+                    ->rules('required|integer')
+                    ->attribute('required');
+                $form->select('course_id', '学科名(ID)')->options(Course::pluck('name', 'id'))
+                    ->rules('required|integer')
+                    ->attribute('required');
+                $form->text('name', '授業名')
+                    ->rules('required|string|max:50')
+                    ->attribute(['class' => 'form-control input-lg'])
+                    ->attribute('required');
+                $school_year = [1 => '1学年', 2 => '2学年', 3 => '3学年', 4 => '4学年',];
+                $form->select('school_year', '学年')->options($school_year);
+                $form->text('teacher_name', '先生名')
+                    ->rules('required|string|max:20')
+                    ->attribute(['class' => 'form-control input-lg'])
+                    ->attribute('required')
+                    ->help('（記入例）山田 太郎');
+                $form->text('textbook_name', '教科書名')
+                    ->rules('required|string|max:191')
+                    ->attribute(['class' => 'form-control input-lg'])
+                    ->attribute('required');
+                $form->divide();
 
-            $form->switch('is_final_test', '期末テストがあるか？')->states($states);
-            $form->radio('final_level', '期末テストの難易度')->options($level);
-            $form->switch('is_final_report', '期末レポートがあるか？')->states($states);
-            $form->divide();
+                $states = [
+                    'on'  => ['value' => 1, 'text' => 'ある', 'color' => 'success'],
+                    'off' => ['value' => 0, 'text' => 'ない', 'color' => 'danger'],
+                ];
+                $level = [1 => 'とても簡単', 2 => '簡単', 3 => '普通', 4 => '難しい', 5 => 'とても難しい',];
 
-            $form->textarea('test_range', 'テスト範囲(出題傾向)')
-                ->rules('required|string|max:700')
-                ->attribute(['class' => 'form-control input-lg'])
-                ->attribute('required');
-            $form->divide();
+                $form->switch('is_intermediate_test', '中間テストがあるか？')->states($states);
+                $form->radio('intermediate_level', '中間テストの難易度')->options($level);
+                $form->switch('is_intermediate_report', '中間レポートがあるか？')->states($states);
+                $form->divide();
 
-            $attend = ['取らない' => '取らない', '時々取る' => '時々取る', 'ほぼ毎回取る' => 'ほぼ毎回取る', '取る' => '取る',];
-            $form->radio('attend', '出席')->options($attend);
-            $form->text('attendance_method', '出席方法')
-                ->rules('required|string|max:50')
-                ->attribute(['class' => 'form-control input-lg'])
-                ->attribute('required');
-            $form->divide();
+                $form->switch('is_final_test', '期末テストがあるか？')->states($states);
+                $form->radio('final_level', '期末テストの難易度')->options($level);
+                $form->switch('is_final_report', '期末レポートがあるか？')->states($states);
+                $form->divide();
 
-            $form->multipleSelect('tags', 'タグ付け')->options(Tag::all()->pluck('name', 'id'));
-            $form->divide();
+                $form->textarea('test_range', 'テスト範囲(出題傾向)')
+                    ->rules('required|string|max:700')
+                    ->attribute(['class' => 'form-control input-lg'])
+                    ->attribute('required');
+                $form->divide();
 
-            $form->textarea('remarks', '備考')
-                ->rules('string|max:500')
-                ->attribute(['class' => 'form-control input-lg']);
+                $attend = ['取らない' => '取らない', '時々取る' => '時々取る', 'ほぼ毎回取る' => 'ほぼ毎回取る', '取る' => '取る',];
+                $form->radio('attend', '出席')->options($attend);
+                $form->text('attendance_method', '出席方法')
+                    ->rules('required|string|max:50')
+                    ->attribute(['class' => 'form-control input-lg'])
+                    ->attribute('required');
+                $form->divide();
+
+                $form->multipleSelect('tags', 'タグ付け')->options(Tag::all()->pluck('name', 'id'));
+                $form->divide();
+
+                $form->textarea('remarks', '備考')
+                    ->rules('string|max:500')
+                    ->attribute(['class' => 'form-control input-lg']);
+
+            })->tab('先輩のコメント', function ($form) {
+
+                $form->hasMany('seniors', '先輩', function (Form\NestedForm $form) {
+                    $form->textarea('comment', 'コメント')
+                        ->rules('string|max:300');
+                        // ->attribute(['class' => 'form-control input-lg']);
+                });
+
+            });
+
+
+
 
             $form->display('created_at', 'Created At');
             $form->display('updated_at', 'Updated At');

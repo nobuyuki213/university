@@ -47,7 +47,7 @@
 				<div class="university">
 					<div class="card text-center border-primary">
 						<div class="card-header">
-							<p class="mb-0">University</p>
+							<p class="mb-0">大学</p>
 						</div>
 						<div class="card-body">
 							<h5 class="mb-0">{{ $lesson->university->name }}</h5>
@@ -60,7 +60,7 @@
 				<div class="faculty">
 					<div class="card text-center border-primary">
 						<div class="card-header">
-							<p class="mb-0">faculty</p>
+							<p class="mb-0">学部</p>
 						</div>
 						<div class="card-body">
 							<h5 class="mb-0">{{ $lesson->faculty->name }}</h5>
@@ -73,7 +73,7 @@
 				<div class="course">
 					<div class="card text-center border-primary">
 						<div class="card-header">
-							<p class="mb-0">course</p>
+							<p class="mb-0">学科</p>
 						</div>
 						<div class="card-body">
 							<h5 class="mb-0">{{ $lesson->course->name }}</h5>
@@ -86,7 +86,7 @@
 				<div class="school_year">
 					<div class="card text-center border-primary">
 						<div class="card-header">
-							<p class="mb-0">school year</p>
+							<p class="mb-0">学年</p>
 						</div>
 						<div class="card-body">
 							<h5 class="mb-0">{{ $lesson->school_year }}学年</h5>
@@ -99,7 +99,7 @@
 				<div class="teacher">
 					<div class="card text-center border-primary">
 						<div class="card-header">
-							<p class="mb-0">teacher</p>
+							<p class="mb-0">先生</p>
 						</div>
 						<div class="card-body">
 							<h5 class="mb-0">{{ $lesson->teacher_name }}</h5>
@@ -115,7 +115,7 @@
 				<div class="textbook">
 					<div class="card text-center border-primary">
 						<div class="card-header">
-							<p class="mb-0">textbook</p>
+							<p class="mb-0">教科書</p>
 						</div>
 						<div class="card-body">
 							<h5 class="mb-0 text-left">{{ $lesson->textbook_name }}</h5>
@@ -240,7 +240,7 @@
 							<p class="mb-0">テスト範囲(出題傾向)</p>
 						</div>
 						<div class="card-body">
-							<p class="text-primary mb-0">{{ $lesson->test_range}}</p>
+							<p class="text-primary text-left mb-0">{{ $lesson->test_range}}</p>
 						</div>
 					</div>
 				</div>
@@ -300,7 +300,7 @@
 				<div class="remarks">
 					<div class="card text-center border-info">
 						<div class="card-body">
-							<p class="text-primary mb-0">{{ $lesson->remarks}}</p>
+							<p class="text-primary text-left mb-0">{{ $lesson->remarks}}</p>
 						</div>
 					</div>
 				</div>
@@ -320,7 +320,20 @@
 				<div class="comment">
 					<div class="card border-warning">
 						<div class="card-body">
-							<p class="text-primary mb-0">{{ $lesson->remarks}}</p>
+						@if (count($lesson->seniors) > 0)
+							@foreach ($lesson->seniors as $senior)
+							<div class="media">
+								<img src="{{ asset('storage/avatars/default.jpg') }}" class="rounded-circle border border-warning mr-1" style="max-width:35px;">
+								<div media-body>
+									<div class="balloon-left @if($loop->last)mb-0 @endif">
+										<p>{{ $senior->comment }}</p>
+									</div>
+								</div>
+							</div>
+							@endforeach
+						@else
+							<p class="mb-0">coming soon</p>
+						@endif
 						</div>
 					</div>
 				</div>
