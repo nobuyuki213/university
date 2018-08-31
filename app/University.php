@@ -66,6 +66,16 @@ class University extends Model
 	{
 		return $this->hasMany(Lesson::class);
 	}
+
+	/**
+	 * [users 大学に属する複数のユーザーを取得するリレーション定義]
+	 * @return [type] [description]
+	 */
+	public function users()
+	{
+		return $this->hasMany(User::class);
+	}
+
 }
 
 

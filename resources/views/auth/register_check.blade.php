@@ -30,7 +30,7 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-md-6 offset-md-4 text-center text-md-left">
                                 <button type="submit" class="btn btn-primary">
                                     仮会員登録
                                 </button>
@@ -42,4 +42,4 @@
         </div>
     </div>
 </div>
-@endsection()
+@endsection

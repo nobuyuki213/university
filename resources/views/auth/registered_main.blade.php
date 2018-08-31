@@ -7,9 +7,9 @@
                 <div class="card">
                     <div class="card-header">本会員登録完了</div>
 
-                    <div class="card-body">
+                    <div class="card-body text-center">
                         <p>本会員登録が完了しました。</p>
-                        <a href="{{url('/')}}" class="btn btn-primary">トップページへ戻る</a>
+                        <a href="{{ env('APP_URL') }}" class="btn btn-primary">TOPページへ</a>
                     </div>
                 </div>
             </div>

@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\User;
+use App\University;
 use DB;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\ModelForm;
@@ -54,6 +55,8 @@ class UserController extends Controller
                 $show->birth_year('誕生年');
                 $show->birth_month('誕生月');
                 $show->birth_day('誕生日');
+                $show->university()->name('入学した大学');
+                $show->admission_year('入学年度');
                 $show->avatar('アバター');
                 $show->email('メールアドレス');
                 $show->email_verified('メールアドレス認証確認');
@@ -121,6 +124,8 @@ class UserController extends Controller
             // 表示項目を追加
             $grid->column('name', '氏名');
             $grid->column('email', 'メールアドレス');
+            $grid->column('university.name', '入学した大学');
+            $grid->column('admission_year', '入学年度');
             $grid->reviews('レビュー数')->display(function ($review) {
                 return count($review);
             })->label('primary');
@@ -136,6 +141,8 @@ class UserController extends Controller
             $grid->filter(function($filter){
                 $filter->like('name', '氏名');
                 $filter->like('email', 'メールアドレス');
+                $filter->in('university.name', '入学した大学')->multipleSelect(University::pluck('name','name'));
+                $filter->between('admission_year', '入学年度')->year();
             });
             // ソースデータの並び順の初期設定
             $grid->model()->orderBy('id', 'desc');

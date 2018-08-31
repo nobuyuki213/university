@@ -53,13 +53,15 @@ class UniversityController extends Controller
                 $show->address('住所');
                 $show->phone_number('電話番号');
                 $show->url('公式サイト');
+                $show->created_at();
+                $show->updated_at();
 
-                $show->facultycontents($univer->name . 'に所属するの学部', function ($facultycontents) {
+                $show->facultycontents($univer->name . 'に所属する学部', function ($facultycontents) {
                     // 表示項目の追加
                     $facultycontents->faculty()->id('学部名ID');
                     $facultycontents->faculty()->name('学部名');
                     $facultycontents->id('学部ID');
-                    // $facultycontents->overview('学部説明');
+                    $facultycontents->overview('学部説明')->limit(30);
                     $facultycontents->created_at();
                     $facultycontents->updated_at();
 
@@ -69,12 +71,12 @@ class UniversityController extends Controller
                     $facultycontents->disableActions();
                 });
 
-                $show->coursecontents($univer->name . 'に所属するの学科', function ($coursecontents) {
+                $show->coursecontents($univer->name . 'に所属する学科', function ($coursecontents) {
                     // 表示項目の追加
                     $coursecontents->course()->id('学科名ID');
                     $coursecontents->course()->name('学科名');
                     $coursecontents->id('学科ID');
-                    // $coursecontents->feature('学科説明');
+                    $coursecontents->feature('学科説明')->limit(30);
                     $coursecontents->created_at();
                     $coursecontents->updated_at();
 
@@ -84,8 +86,24 @@ class UniversityController extends Controller
                     $coursecontents->disableActions();
                 });
 
-                $show->created_at();
-                $show->updated_at();
+                $show->users($univer->name . 'に入学したユーザー', function ($users) {
+                    // 表示項目の追加
+                    $users->id('ユーザーID');
+                    $users->name('氏名');
+                    $users->name_phonetic('氏名（フリガナ）');
+                    $users->admission_year('入学年度');
+                    $users->created_at();
+                    $users->updated_at();
+                    // フィルター検索機能の項目を追加
+                    $users->filter(function ($filter) {
+                        $filter->like('name', '氏名');
+                    });
+                    // 操作パネル非表示設定
+                    $users->disableCreateButton();
+                    $users->disableRowSelector();
+                    $users->disableActions();
+                });
+
             }));
         });
     }

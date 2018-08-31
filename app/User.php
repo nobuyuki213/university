@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'email_verified', 'email_verify_token',
+        'university_id', 'name', 'name_phonetic', 'email', 'birth_year', 'birth_month', 'birth_day', 'admission_year', 'password', 'email_verified', 'email_verify_token',
     ];
 
     /**
@@ -39,6 +39,15 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new PasswordResetNotification($token));
+    }
+
+    /**
+     * [university ユーザーが属している唯一の大学を取得するリレーション定義]
+     * @return [type] [description]
+     */
+    public function university()
+    {
+        return $this->belongsTo(University::class);
     }
 
     /**

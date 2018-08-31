@@ -39,8 +39,24 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="university_id" class="col-lg-3 col-form-label">入学した大学</label>
+                            <div class="col-lg-9">
+                                <span class="">{{$user->university->name}}</span>
+                                <input type="hidden" name="university_id" value="{{$user->university->id}}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="admission_year" class="col-lg-3 col-form-label">大学に入学した年度</label>
+                            <div class="col-lg-9">
+                                <span class="">{{$user->admission_year}}</span><span class="px-1">年度</span>
+                                <input type="hidden" name="admission_year" value="{{$user->admission_year}}">
+                            </div>
+                        </div>
+
                         <div class="form-group row mb-0">
-                            <div class="col-lg-9 offset-lg-3">
+                            <div class="col-lg-9 offset-lg-3 text-center text-lg-left">
                                 <button type="submit" class="btn btn-primary">
                                     本登録
                                 </button>
@@ -52,4 +68,4 @@
         </div>
     </div>
 </div>
-@endsection()
+@endsection

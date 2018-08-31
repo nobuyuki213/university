@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Mail\EmailVerification;
 use App\User;
+use App\University;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Http\Requests\registeredValiRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -127,7 +129,8 @@ class RegisterController extends Controller
             $user->status = config('const.USER_STATUS.MAIL_AUTHED');
             $user->email_verified = config('const.USER_STATUS.MAIL_AUTHED');
             if ($user->save()) {
-                return view('auth.register_main', compact('email_token'));
+                $universities = University::all();
+                return view('auth.register_main', compact('email_token', 'universities'));
             } else {
                 return view('auth.register_main')->with('message', 'メール認証に失敗しました。再度、メールからリンクをクリックしてください。');
             }
@@ -139,15 +142,8 @@ class RegisterController extends Controller
      * @param  Request $request [description]
      * @return [type]           [description]
      */
-    public function mainCheck(Request $request)
+    public function mainCheck(registeredValiRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required|string|max:255',
-            'name_phonetic' => 'required|string',
-            'birth_year' => 'required|numeric',
-            'birth_month' => 'required|numeric',
-            'birth_day' => 'required|numeric',
-        ]);
         // データ保存用
         $email_token = $request->email_token;
         // User インスタンスを生成し view に渡す
@@ -157,6 +153,8 @@ class RegisterController extends Controller
         $user->birth_year = $request->birth_year;
         $user->birth_month = $request->birth_month;
         $user->birth_day = $request->birth_day;
+        $user->university = University::find($request->university);
+        $user->admission_year = $request->admission_year;
 
         return view('auth.register_main_check', compact('user', 'email_token'));
     }
@@ -165,11 +163,13 @@ class RegisterController extends Controller
     {
         $user = User::where('email_verify_token', $request->email_token)->first();
         $user->status = config('const.USER_STATUS.REGISTER');
+        $user->university_id = $request->university_id;
         $user->name = $request->name;
         $user->name_phonetic = $request->name_phonetic;
         $user->birth_year = $request->birth_year;
         $user->birth_month = $request->birth_month;
         $user->birth_day = $request->birth_day;
+        $user->admission_year = $request->admission_year;
         $user->save();
 
         $this->guard()->login($user);
