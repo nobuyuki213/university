@@ -41,13 +41,13 @@ class LessonsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $id lesson_id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         //
-        $lesson = Lesson::with('university', 'faculty', 'course', 'tags', 'seniors')->find($id);
+        $lesson = Lesson::with(['university', 'faculty', 'course', 'tags', 'seniors'])->find($id);
 
         return view('lessons.show', compact('lesson'));
     }

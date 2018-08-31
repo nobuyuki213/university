@@ -48,11 +48,16 @@ Route::group(['middleware' => ['auth']], function() {
 		// Route::get('complete', 'ReviewsController@complete')->name('review.complete'); 停止
 	});
 	// 大学選択ページ画面
-	Route::get('school', 'UniversitiesSearchController@school')->name('school');
-	// 大学の授業サーチ画面
-	Route::resource('university', 'UniversitiesController', ['only' => ['show']]);
-	// 授業ページ画面
-	Route::resource('lesson', 'LessonsController', ['only' => ['show']]);
+	Route::get('schools', 'UniversitiesSearchController@school')->name('school');
+	Route::group(['prefix' => 'schools'], function(){
+		// 大学の授業サーチ画面
+		Route::resource('university', 'UniversitiesController', ['only' => ['show']]);
+		Route::group(['prefix' => 'university'], function(){
+			// 授業ページ画面
+			Route::resource('lesson', 'LessonsController', ['only' => ['show']]);
+		});
+	});
+
 });
 
 
