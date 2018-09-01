@@ -4,6 +4,10 @@
 
 @endsection
 
+@section('headbreadcrumbs', Breadcrumbs::view('breadcrumbs::json-ld', 'lesson', $lesson))
+
+@section('breadcrumbs', Breadcrumbs::render('lesson', $lesson))
+
 @section('content')
 <div class="container">
 	{{-- <div class="mt-3 d-inline-block">

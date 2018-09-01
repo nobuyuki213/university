@@ -23,7 +23,7 @@ Route::post('register/main_register', 'Auth\RegisterController@mainRegister')->n
 
 // Route::get('/home', 'HomeController@index')->name('home');
 // トップページ画面
-Route::get('/', 'WelcomeController@welcome');
+Route::get('/', 'WelcomeController@welcome')->name('top');
 
 // ログイン認証設定
 Route::group(['middleware' => ['auth']], function() {
@@ -48,7 +48,7 @@ Route::group(['middleware' => ['auth']], function() {
 		// Route::get('complete', 'ReviewsController@complete')->name('review.complete'); 停止
 	});
 	// 大学選択ページ画面
-	Route::get('schools', 'UniversitiesSearchController@school')->name('school');
+	Route::get('schools', 'UniversitiesSearchController@school')->name('schools');
 	Route::group(['prefix' => 'schools'], function(){
 		// 大学の授業サーチ画面
 		Route::resource('university', 'UniversitiesController', ['only' => ['show']]);

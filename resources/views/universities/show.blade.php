@@ -4,6 +4,10 @@
 
 @endsection
 
+@section('headbreadcrumbs', Breadcrumbs::view('breadcrumbs::json-ld', 'university', $university))
+
+@section('breadcrumbs', Breadcrumbs::render('university', $university, $course_ids ?? '', $school_years ?? '', $tag_ids ?? ''))
+
 @section('content')
 {{-- テスト用 --}}
 {{-- <pre>

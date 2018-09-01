@@ -11,8 +11,6 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
         <!--drawer Css -->
         <link href="{{ asset('css/drawer.min.css') }}" rel="stylesheet">
-        <!--My Css -->
-        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
         <!--hover Css -->
         <link href="{{ asset('css/hover-min.css') }}" rel="stylesheet">
 
@@ -20,16 +18,29 @@
 
         {{-- bootstrap.min.css 4.1.2 --}}
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.2/lux/bootstrap.min.css">
+        <!--My Css -->
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
         {{-- Font Awesome --}}
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
         @yield('stylesheet_fontawesome_after')
+
+        @yield('headbreadcrumbs')
     </head>
     <body class="drawer drawer--right drawer--navbarTopGutter" style="padding-top:4.5rem;">
 
-        @include('commons.navbar')
+        @include('commons.navbar'){{-- in header --}}
 
-        @yield('content')
+        <main>
 
+            @yield('breadcrumbs')
+
+            @yield('content')
+
+        </main>
+        <footer>
+
+        </footer>
 
         {{-- jquery-3.2.1.slim.min.js --}}
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

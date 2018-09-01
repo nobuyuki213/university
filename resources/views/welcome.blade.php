@@ -21,7 +21,7 @@
     <div class="main-contents row">
         <div class="col-md-4 mb-4">
             <div class="card shadow-sm">
-                <a href="{{ route('school') }}">
+                <a href="{{ route('schools') }}">
                     <figure class="mb-0">
                         <h5 class="text-center text-white px-3 py-3 mb-0 w-70">School work</h5>
                         <img src="{{ asset('storage/student.jpg') }}" class="card-img img-fluid" style="height:230px;object-fit:none;object-position: 50% 0" />

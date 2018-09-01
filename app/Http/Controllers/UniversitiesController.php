@@ -81,8 +81,8 @@ class UniversitiesController extends Controller
         $school_years = $request->school_years;
         $tag_ids = $request->tag_ids;
 
-        $university = University::with('courseContents')->get()->find($id);
-        $lessons = University::find($id)->lessons->all();
+        $university = University::with('courseContents')->findOrFail($id);
+        $lessons = $university->lessons->all();
         $tags = Tag::all();
         // dd($lessons);
 

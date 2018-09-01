@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('stylesheet')
+
+@endsection
+
+@section('headbreadcrumbs', Breadcrumbs::view('breadcrumbs::json-ld', 'schools'))
+
+@section('breadcrumbs', Breadcrumbs::render('schools'))
+
 @section('content')
 <div class="jumbotron jumbotron-fluid bg-primary">
     <div class="container">
