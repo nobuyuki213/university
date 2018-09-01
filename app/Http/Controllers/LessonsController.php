@@ -44,10 +44,10 @@ class LessonsController extends Controller
      * @param  int  $id lesson_id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Lesson $lesson)
     {
         //
-        $lesson = Lesson::with(['university', 'faculty', 'course', 'tags', 'seniors'])->findOrFail($id);
+        $lesson = Lesson::with(['university', 'faculty', 'course', 'tags', 'seniors'])->findOrFail($lesson->id);
 
         return view('lessons.show', compact('lesson'));
     }

@@ -4,9 +4,9 @@
 
 @endsection
 
-@section('headbreadcrumbs', Breadcrumbs::view('breadcrumbs::json-ld', 'university', $university))
+@section('headbreadcrumbs', Breadcrumbs::view('breadcrumbs::json-ld', 'university.show', $university))
 
-@section('breadcrumbs', Breadcrumbs::render('university', $university, $course_ids ?? '', $school_years ?? '', $tag_ids ?? ''))
+@section('breadcrumbs', Breadcrumbs::render('university.show', $university, $course_ids ?? '', $school_years ?? '', $tag_ids ?? ''))
 
 @section('content')
 {{-- テスト用 --}}

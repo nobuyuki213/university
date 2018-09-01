@@ -69,10 +69,10 @@ class UniversitiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $id)
+    public function show(University $university, Request $request)
     {
         // 授業の絞り込み処理を実行
-        $search_lessons = Lesson::search($request, $id);
+        $search_lessons = Lesson::search($request, $university->id);
         $message = $search_lessons['message'];
         $search_lessons = $search_lessons['lessons'];
 
@@ -81,7 +81,7 @@ class UniversitiesController extends Controller
         $school_years = $request->school_years;
         $tag_ids = $request->tag_ids;
 
-        $university = University::with('courseContents')->findOrFail($id);
+        $university = University::with('courseContents')->findOrFail($university->id);
         $lessons = $university->lessons->all();
         $tags = Tag::all();
         // dd($lessons);

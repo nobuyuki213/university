@@ -8,7 +8,7 @@
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ ($breadcrumb = Breadcrumbs::current()) ? $breadcrumb->title.' | ' : '' }}{{ config('app.name', 'Laravel') }}</title>
         <!--drawer Css -->
         <link href="{{ asset('css/drawer.min.css') }}" rel="stylesheet">
         <!--hover Css -->

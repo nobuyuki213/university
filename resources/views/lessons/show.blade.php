@@ -4,9 +4,9 @@
 
 @endsection
 
-@section('headbreadcrumbs', Breadcrumbs::view('breadcrumbs::json-ld', 'lesson', $lesson))
+@section('headbreadcrumbs', Breadcrumbs::view('breadcrumbs::json-ld', 'lesson.show', $lesson))
 
-@section('breadcrumbs', Breadcrumbs::render('lesson', $lesson))
+@section('breadcrumbs', Breadcrumbs::render('lesson.show', $lesson))
 
 @section('content')
 <div class="container">

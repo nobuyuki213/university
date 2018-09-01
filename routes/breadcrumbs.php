@@ -15,7 +15,7 @@ Breadcrumbs::register('schools_s', function ($breadcrumbs) {
 	$breadcrumbs->push('選択した大学', route('schools'), []);
 });
 //Top > schools > [university.show]
-Breadcrumbs::register('university', function ($breadcrumbs, $university, $course_ids = null, $school_years = null, $tag_ids = null) {
+Breadcrumbs::register('university.show', function ($breadcrumbs, $university, $course_ids = null, $school_years = null, $tag_ids = null) {
 	$breadcrumbs->parent('schools_s');
 	// 授業の条件検索実行の分岐による表示名の変更
 	if ($course_ids || $school_years || $tag_ids) {
@@ -25,8 +25,8 @@ Breadcrumbs::register('university', function ($breadcrumbs, $university, $course
 	}
 });
 //Top > schools > [university.show] > [lesson.show]
-Breadcrumbs::register('lesson', function ($breadcrumbs, $lesson) {
-	$breadcrumbs->parent('university', $lesson->university);
+Breadcrumbs::register('lesson.show', function ($breadcrumbs, $lesson) {
+	$breadcrumbs->parent('university.show', $lesson->university);
 	$breadcrumbs->push($lesson->name, route('lesson.show', $lesson->id), []);
 });
 
