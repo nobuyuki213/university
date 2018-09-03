@@ -62,7 +62,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-lg-8 offset-lg-4 text-center text-lg-feft">
+                            <div class="col-lg-8 offset-lg-4 text-center text-lg-left">
                                 <button type="submit" class="btn btn-primary">
                                     確認画面へ
                                 </button>

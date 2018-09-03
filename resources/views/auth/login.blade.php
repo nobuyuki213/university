@@ -50,7 +50,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-lg-8 offset-lg-4">
+                            <div class="col-lg-8 offset-lg-4 text-center text-lg-left">
                                 <button type="submit" class="btn btn-primary">
                                     ログイン
                                 </button>
@@ -63,6 +63,13 @@
                     </form>
                 </div>
             </div>
+            @if ($errors->has('email'))
+                <div class="mt-3">
+                    <div class="alert alert-warning">
+                        <p class="mb-0">本登録が完了していない場合は、仮登録完了のメール内容をご確認の上、本会員登録を行ってください。</p>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 </div>

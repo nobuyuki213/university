@@ -141,7 +141,7 @@ class RegisterController extends Controller
                 return view('auth.register_main')->with('message', '既に登録されています。ログインして利用してください。');
             } //REGISTER=1
             // ユーザーステータスの更新
-            $user->status = config('const.USER_STATUS.MAIL_AUTHED');
+            // $user->status = config('const.USER_STATUS.MAIL_AUTHED');
             $user->email_verified = config('const.USER_STATUS.MAIL_AUTHED');
             if ($user->save()) {
                 $universities = University::all();
