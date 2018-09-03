@@ -62,7 +62,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-lg-8 offset-lg-4">
+                            <div class="col-lg-8 offset-lg-4 text-center text-lg-feft">
                                 <button type="submit" class="btn btn-primary">
                                     確認画面へ
                                 </button>
@@ -71,6 +71,15 @@
                     </form>
                 </div>
             </div>
+            @if (session('status'))
+                <div class="mt-3">
+                    <div class="alert alert-warning">
+                        <p>ご入力頂いたメールアドレスは、既に仮登録完了のメールを送信しております。</p>
+                        <p >送信日時：{{ session('status') }}</p>
+                        <p class="mb-0">お確かめいただき、メールの内容をご確認の上本会員登録を行ってください。</p>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 </div>

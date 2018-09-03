@@ -57,14 +57,29 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             // 'name' => 'required|string|max:255', // 仮登録時のバリデーションは名前を含まないため
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'bail|required|string|email|unique:users|max:255',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
 
     public function preCheck(Request $request)
     {
-        $this->validator($request->all())->validate();
+        $validator = $this->validator($request->all());
+
+        if ($validator->fails()) {
+            $user = User::where('email', $request->email)->first();
+            if ($validator->errors()->has('email') && $user != null) {
+                $created_at = Carbon::parse($user->created_at)->format('Y年m月d日');
+                return redirect('register')
+                            ->with('status', $created_at)
+                            ->withErrors($validator)
+                            ->withInput();
+            } else {
+                return redirect('register')
+                            ->withErrors($validator)
+                            ->withInput();
+            }
+        }
 
         $request->flashOnly('email');
 
