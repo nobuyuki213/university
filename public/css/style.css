@@ -128,3 +128,16 @@ figure:hover figcaption {
 	content: ">";
 	padding-right: 0.2rem;
 }
+
+/*---------------
+ナビバー　透過
+---------------*/
+header.drawer-navbar {
+	background-color: rgba(255,255,255,0.95);
+}
+nav.drawer-nav {
+	background-color: rgba(255,255,255,0);
+}
+.drawer-navbar .drawer-navbar-header {
+	background-color: rgba(255,255,255,0);
+}

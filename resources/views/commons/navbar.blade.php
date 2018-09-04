@@ -2,7 +2,7 @@
     <div class="drawer-container">
         <div class="drawer-navbar-header">
 
-            <a class="drawer-brand" href="{{ url('/') }}">LOGO</a>
+            <a class="drawer-brand" href="{{ env('APP_URL') }}">LOGO</a>
 
             <button type="button" class="drawer-toggle drawer-hamburger">
                 <span class="sr-only">toggle navigation</span>

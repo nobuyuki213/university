@@ -24,7 +24,7 @@
                 <a href="{{ route('schools') }}">
                     <figure class="mb-0">
                         <h5 class="text-center text-white px-3 py-3 mb-0 w-70">School work</h5>
-                        <img src="{{ asset('storage/student.jpg') }}" class="card-img img-fluid" style="height:230px;object-fit:none;object-position: 50% 0" />
+                        <img src="{{ asset('storage/student.jpg') }}" class="card-img img-fluid" style="height:230px;object-fit:cover;object-position: 50% 0" />
                         <figcaption class="text-center">
                             <div class="card-body">
                                 <h3 class="text-white">学業</h3>
@@ -40,7 +40,7 @@
                 <a href="#">
                     <figure class="mb-0">
                         <h5 class="text-center text-white px-3 py-3 mb-0 w-70">Coming soon</h5>
-                        <img src="{{ asset('storage/work.jpg') }}" class="card-img img-fluid" style="height:230px;object-fit:none;object-position: 50% 0" />
+                        <img src="{{ asset('storage/work.jpg') }}" class="card-img img-fluid" style="height:230px;object-fit:cover;object-position: 50% 0" />
                         <figcaption class="text-center">
                             <div class="card-body">
                                 <h3 class="text-white">Coming soon</h3>
