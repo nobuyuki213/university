@@ -53,12 +53,21 @@
         </div>
         <div class="col-md-4 mb-4">
             <div class="card shadow-sm">
-                <img class="card-img-top" src="" alt="カード画像のキャプション">
-                <div class="card-body">
-                    <h3 class="text-center p-5">遊ぶ</h3>
-                </div>
+                <a href="#">
+                    <figure class="mb-0">
+                        <h5 class="text-center text-white px-3 py-3 mb-0 w-70">Coming soon</h5>
+                        <img src="{{ asset('storage/work.jpg') }}" class="card-img img-fluid" style="height:230px;object-fit:cover;object-position: 50% 0" />
+                        <figcaption class="text-center">
+                            <div class="card-body">
+                                <h3 class="text-white">Coming soon</h3>
+                                {{-- <p class="text-white">Entertainment</p> --}}
+                            </div>
+                        </figcaption>
+                    </figure>
+                </a>
             </div>
         </div>
     </div>
 </div>
+
 @endsection()
