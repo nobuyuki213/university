@@ -136,8 +136,13 @@ header.drawer-navbar {
 	background-color: rgba(255,255,255,0.95);
 }
 nav.drawer-nav {
-	background-color: rgba(255,255,255,0);
+	background-color: rgba(255,255,255,1);
 }
 .drawer-navbar .drawer-navbar-header {
 	background-color: rgba(255,255,255,0);
+}
+@media (min-width: 1024px) {
+	nav.drawer-nav {
+		background-color: rgba(255,255,255,0);
+	}
 }
