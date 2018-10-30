@@ -70,4 +70,69 @@
     </div>
 </div>
 
+{{-- 確認用 --}}
+<div class="jumbotron jumbotron-fliud bg-primary rounded-0 my-5">
+    <div class="container">
+        <div class="about card my-5 rounded-0 border-0">
+            <div class="card-header rounded-0">
+                <h3 class="mb-0 py-3 text-center font-weight-bold">about</h3>
+            </div>
+            <div class="card-body">
+                <div class="test-account">
+                    <p>本アプリケーションは、一部ログインを必要とします。メールアドレス等で新規ユーザーご登録いただくか、以下のサンプルをご利用ください。</p>
+                    <div class="table-responsive text-nowrap">
+                        <table class="table w-auto">
+                            <thead>
+                                <tr>
+                                    <th colspan="2" scope="col" class="text-center table-info">ログイン用サンプルアカウント</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">メールアドレス</th>
+                                    <td>boy@test.com</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">パスワード</th>
+                                    <td>boy0000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-responsive text-nowrap">
+                        <table class="table w-auto">
+                            <thead>
+                                <tr>
+                                    <th colspan="2" scope="col" class="text-center table-info">adminログイン用サンプルアカウント</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">ユーザーID</th>
+                                    <td>admin</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">パスワード</th>
+                                    <td>admin</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">URL</th>
+                                    <td><a href="http://university/admin/auth/login" title="admin">adminログインページ</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="">
+                    <h5 class="border-primary border-bottom border-top py-2">■ 実装内容</h5>
+                    <ul>
+                        <li>大学授業の検索機能及び絞り込み機能</li>
+                        <li>ログイン機能</li>
+                        <li>admin管理機能</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection()
